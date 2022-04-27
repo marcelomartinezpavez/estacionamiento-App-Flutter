@@ -1,0 +1,6 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/estacionamiento/estacionamiento/BuildConfig.java
+ com.estacionamiento.estacionamiento.BuildConfig
+com/estacionamiento/estacionamiento/MainActivity.java
+ com.estacionamiento.estacionamiento.MainActivity
