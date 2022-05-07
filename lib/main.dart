@@ -1,3 +1,4 @@
+import 'package:estacionamiento/login.dart';
 import 'package:estacionamiento/salir.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+
+//import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -41,6 +44,10 @@ class MyHomePage extends StatefulWidget {
 
 class NavDrawer extends StatelessWidget {
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -53,6 +60,15 @@ class NavDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
           ),
+          ListTile(
+            title: Text('Login'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => Login()));
+            },
+          ),
+
           ListTile(
             title: Text('Entrar estacionamiento'),
             onTap: () {
@@ -77,6 +93,43 @@ class NavDrawer extends StatelessWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool isLoggedIn = false;
+
+  void autoLogIn() async {
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //final String? userId = prefs.getString('username');
+    //final String? idEmpresa = prefs.getString('idEmpresa');
+    //final String? nameEmpresa = prefs.getString('nameEmpresa');
+    //if (userId != null) {
+      setState(() {
+        isLoggedIn = true;
+        //name = userId;
+      });
+      return;
+    //}
+  }
+
+  Future<Null> logout() async {
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.setString('username', '');
+    //prefs.setString('idEmpresa', '');
+    //prefs.setString('nameEmpresa', '');
+
+    setState(() {
+      //name = '';
+      isLoggedIn = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    autoLogIn();
+  }
+
+
+
   String _data = '';
   String _patente = '';
 
