@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:estacionamiento/src/pages/auth/signup_page.dart';
 
 import 'login_page.dart';
 
@@ -9,29 +7,33 @@ class AuthLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(
-            tabs: [
+    return Scaffold(
+        appBar: AppBar(title: const Text('Estacionamiento')),
+        body: Center(child: LogInPage(),));
 
-              Tab(
-                icon: Icon(Icons.login),
-                text: 'Iniciar sesión',
-              ),
-              Tab(icon: Icon(Icons.assignment), text: 'Crear cuenta'),
-            ],
-          ),
-          title: const Text('PTU'),
-        ),
-        body: TabBarView(
-          children: [
-            LogInPage(),
-            SignUpPage(),
-          ],
-        ),
-      ),
-    );
+    // return DefaultTabController(
+    //   length: 2,
+    //   child: Scaffold(
+    //     appBar: AppBar(
+    //       bottom: const TabBar(
+    //         tabs: [
+    //
+    //           Tab(
+    //             icon: Icon(Icons.login),
+    //             text: 'Iniciar sesión',
+    //           ),
+    //           Tab(icon: Icon(Icons.assignment), text: 'Crear cuenta'),
+    //         ],
+    //       ),
+    //       title: const Text('PTU'),
+    //     ),
+    //     body: TabBarView(
+    //       children: [
+    //         LogInPage(),
+    //         SignUpPage(),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }

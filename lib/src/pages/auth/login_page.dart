@@ -1,7 +1,8 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:estacionamiento/src/model/login_model.dart';
 import 'package:estacionamiento/src/routes/routes.dart';
+import 'package:estacionamiento/src/services/auth_service.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -11,8 +12,7 @@ class LogInPage extends StatefulWidget {
 class _LogInPagePageState extends State<LogInPage> {
   final GlobalKey<FormState> logInKey = new GlobalKey<FormState>();
 
-  LogIn logIn =
-      LogIn(email: 'diegomartinezpavez@icloud.com', password: 'q1w2e3r4');
+  LogIn logIn = LogIn(username: 'admin', password: '123456');
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,6 @@ class _LogInPagePageState extends State<LogInPage> {
             width: size.width * 0.85,
             padding: const EdgeInsets.symmetric(vertical: 30.0),
             margin: const EdgeInsets.symmetric(vertical: 15.0),
-
             decoration: BoxDecoration(
                 color: Theme.of(context).backgroundColor,
                 borderRadius: BorderRadius.circular(5.0),
@@ -49,15 +48,15 @@ class _LogInPagePageState extends State<LogInPage> {
                         const SizedBox(
                           height: 30.0,
                         ),
-                        _crearEmail(),
+                        _rednerInputUsername(),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        _crearPassword(),
+                        _rednerInputPassword(),
                         const SizedBox(
                           height: 20.0,
                         ),
-                        _crearBotonIniciarSesion(),
+                        _renderButtonLogIn(),
                         const SizedBox(
                           height: 20.0,
                         ),
@@ -87,36 +86,34 @@ class _LogInPagePageState extends State<LogInPage> {
     );
   }
 
-  Widget _crearEmail() {
+  Widget _rednerInputUsername() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: TextFormField(
-          initialValue: logIn.email,
+          initialValue: logIn.username,
           decoration: const InputDecoration(
               icon: Icon(
-                Icons.alternate_email,
+                Icons.person,
                 color: Colors.greenAccent,
               ),
               hintText: 'ejemplo@correo.cl',
               labelText: 'Correo'),
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           textCapitalization: TextCapitalization.sentences,
           validator: (value) {
-            RegExp regExp = RegExp(
-                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-            if (regExp.hasMatch(value!)) {
+            if (value != null) {
               return null;
             } else {
-              return 'El email no es valido';
+              return 'Campo obligatorio';
             }
           },
-          onSaved: (value) => logIn.email = value!,
+          onSaved: (value) => logIn.username = value!,
           enableSuggestions: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
         ));
   }
 
-  Widget _crearPassword() {
+  Widget _rednerInputPassword() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: TextFormField(
@@ -141,38 +138,41 @@ class _LogInPagePageState extends State<LogInPage> {
         ));
   }
 
-  Widget _crearBotonIniciarSesion() {
+  Widget _renderButtonLogIn() {
     return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return RaisedButton(
+        return ElevatedButton(
             onPressed: () {
               if (!logInKey.currentState!.validate()) {
-                Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text('Hay campos que no son validos')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Hay campos que no son validos')));
               } else {
                 _userLogIn(context);
               }
             },
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
-                child: Text('Iniciar Sesión')));
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 80.0, vertical: 20.0),
+                child: const Text('Iniciar Sesión')));
       },
     );
   }
 
   void _userLogIn(context) {
-    goHome(context);
-    // if (logInKey.currentState!.validate()) {
-    //   logInKey.currentState!.save();
-    //   AuthService.logIn(logIn)
-    //       .then((value) => navigateAndReplaceToAdmin(context))
-    //       .catchError((err) => {
-    //             //TODO: Aquí debe especificar el error
-    //             Scaffold.of(context).showSnackBar(SnackBar(
-    //                 content: Text('Hubo problemas para iniciar sesión')))
-    //           });
-    // } else {
-    //   print('No es valido, nunca debería ver esto');
-    // }
+    Auth_Service auth_service = Auth_Service();
+
+    if (logInKey.currentState!.validate()) {
+      logInKey.currentState!.save();
+      auth_service.logIn(logIn).then((value) {
+        print(value);
+        goHome(context);
+      }).catchError((err) {
+        print(err);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(err)));
+      });
+    } else {
+      print('No es valido, nunca debería ver esto');
+    }
   }
 }
