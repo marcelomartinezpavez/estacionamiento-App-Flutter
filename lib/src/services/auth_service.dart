@@ -26,9 +26,19 @@ class Auth_Service {
         return false;
       } else {
         LogIn login = LogIn(username: username, password: pass);
-        var auth = await logIn(login);
-        print('auth obtenido: ' + auth.toString());
-        return auth;
+        var response = await http.post(Uri.parse(_url + 'login/'),
+            headers: headers,
+            body: jsonEncode(<String, String>{
+              'users': login.username,
+              'pass': login.password
+            }));
+        if (response.statusCode == 200) {
+          return true;
+        } else {
+          print('Login incorrecto desde localstorage');
+          return false;
+          // throw Exception('Error al consultar el usuario');
+        }
       }
     });
   }
@@ -55,6 +65,7 @@ class Auth_Service {
       await storage.setItem('userEstacionamiento', response.body);
       return true;
     } else {
+      print('Login incorrecto');
       throw response.body;
       return false;
       // throw Exception('Error al consultar el usuario');
@@ -62,6 +73,9 @@ class Auth_Service {
   }
 
   signOut(context) {
+    storage.deleteItem('userEstacionamiento');
+    storage.deleteItem('username');
+    storage.deleteItem('pass');
     //TODO: Falta el hecho de efectivamente cerrar la sesión
     goLogin(context);
   }

@@ -53,6 +53,7 @@ class _AppState extends State<MyApp> {
         _initialized = true;
       });
     } catch (e) {
+      print('Error: $e');
       setState(() {
         _error = true;
       });

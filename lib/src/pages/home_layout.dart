@@ -1,4 +1,6 @@
 import 'package:estacionamiento/src/pages/configuration_page.dart';
+import 'package:estacionamiento/src/pages/ingresar.dart';
+import 'package:estacionamiento/src/pages/salir.dart';
 import 'package:estacionamiento/src/services/api_service.dart';
 import 'package:estacionamiento/src/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -59,11 +61,28 @@ class _HomeLayoutState extends State<HomeLayout> {
             Placeholder(
               fallbackHeight: 400,
             ),
+            Center(
+                child:
+                    Text('Aqui en el placeholder van los cupos disponibles^')),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Card(child: Text('Ingresar veíhiculo')),
-                Card(child: Text('Sacar veíhiculo')),
+                GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => Ingresar(),
+                          fullscreenDialog: true,
+                        )),
+                    child: Card(child: Text('Ingresar veíhiculo'))),
+                GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => SalirPage(),
+                          fullscreenDialog: true,
+                        )),
+                    child: Card(child: Text('Sacar veíhiculo'))),
               ],
             )
           ],
