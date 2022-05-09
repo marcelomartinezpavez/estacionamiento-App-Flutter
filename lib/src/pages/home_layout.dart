@@ -56,36 +56,122 @@ class _HomeLayoutState extends State<HomeLayout> {
                 child: const Text('Cerrar sesión'))
           ],
         ),
-        body: Column(
-          children: [
-            Placeholder(
-              fallbackHeight: 400,
-            ),
-            Center(
-                child:
-                    Text('Aqui en el placeholder van los cupos disponibles^')),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) => Ingresar(),
-                          fullscreenDialog: true,
-                        )),
-                    child: Card(child: Text('Ingresar veíhiculo'))),
-                GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) => SalirPage(),
-                          fullscreenDialog: true,
-                        )),
-                    child: Card(child: Text('Sacar veíhiculo'))),
-              ],
-            )
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Placeholder(
+                fallbackHeight: 100,
+              ),
+              const Center(
+                  child: Text(
+                      'Aqui en el placeholder van los cupos disponibles^')),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => const Ingresar(),
+                            fullscreenDialog: true,
+                          )),
+                      child: Card(
+                        color: Colors.green.shade100,
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                    margin: const EdgeInsets.all(10),
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child: const Icon(Icons.input,
+                                        size: 40, color: Colors.green)),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const FittedBox(
+                                    alignment: Alignment.centerLeft,
+                                    fit: BoxFit.scaleDown,
+                                    child: Text('Ingresar vehículo',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                            fontSize: 18)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => SalirPage(),
+                            fullscreenDialog: true,
+                          )),
+                      child: Card(
+                        color: Colors.orange.shade100,
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                    margin: const EdgeInsets.all(10),
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child: const Icon(Icons.output,
+                                        size: 40, color: Colors.orange)),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text('Sacar vehículo',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.orange,
+                                            fontSize: 18)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ));
   }
 }
