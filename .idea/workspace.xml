@@ -12,13 +12,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8283755-294c-4195-93eb-9ca84bad752e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/pages/home_layout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/pages/home_layout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/pages/ingresar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/pages/ingresar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/pages/salir.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/pages/salir.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/services/api_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/services/api_service.dart" afterDir="false" />
-    </list>
+    <list default="true" id="b8283755-294c-4195-93eb-9ca84bad752e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +96,7 @@
       <workItem from="1651966622472" duration="56000" />
       <workItem from="1651966693489" duration="1427000" />
       <workItem from="1651968828032" duration="238000" />
-      <workItem from="1651969082670" duration="18123000" />
+      <workItem from="1651969082670" duration="18199000" />
     </task>
     <servers />
   </component>
