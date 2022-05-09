@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import '../services/api_service.dart';
 
 class Ingresar extends StatefulWidget {
   const Ingresar({Key? key}) : super(key: key);
@@ -11,34 +10,8 @@ class Ingresar extends StatefulWidget {
 }
 
 class _IngresarState extends State<Ingresar> {
-  String _data = '';
   String _patente = '';
-
-  Future<dynamic> _insertVehicle() async {
-    final response = await http.post(
-      Uri.parse('http://204.48.31.201:8080/estacionamiento/insert/estacionado'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-          <String, String>{'patente': _patente, 'estacionamiento_id': '3'}),
-    );
-
-    if (response.statusCode == 200) {
-      _data = 'Vehiculo estacionado!';
-      setState(() {
-        _data = 'Vehiculo estacionado!';
-      });
-    } else {
-      print(response.body);
-      print(response.statusCode);
-
-      _data = response.body;
-      setState(() {
-        _data = response.body;
-      });
-    }
-  }
+  Api_Service api = Api_Service();
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +19,46 @@ class _IngresarState extends State<Ingresar> {
       // drawer: NavDrawer(),
 
       appBar: AppBar(
-        title: Text('Ingresar'),
+        title: const Text('Ingresar vehículo',
+            style: TextStyle(color: Colors.green)),
+        backgroundColor: Colors.green.shade100,
       ),
 
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Ingrese patente del Vehiculo que ingresa',
-            ),
-            TextField(
-              onChanged: (text) {
-                setState(() {
-                  _patente = text;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Patente',
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'Ingrese patente del Vehiculo que ingresa',
               ),
-            ),
-            ElevatedButton(
-              onPressed: _insertVehicle,
-              child: Text('Ingresar'),
-            ),
-            Text(
-              '$_data',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+              TextField(
+                onChanged: (text) {
+                  setState(() {
+                    _patente = text;
+                  });
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Patente',
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  var response = await api.insertVehicle(_patente);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(response),
+                    action: SnackBarAction(
+                      label: 'Ok',
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ));
+                },
+                child: const Text('Ingresar'),
+              ),
+            ],
+          ),
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

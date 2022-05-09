@@ -20,21 +20,44 @@ class Api_Service {
     return true;
   }
 
-  Future<List<dynamic>> getArrearsByStudent(studentId) async {
-    List<dynamic> arrears = [];
-
-    var response = await http.get(
-      Uri.parse(_url + 'atrasosbyalumno/' + studentId.toString()),
+  Future<String> toPayVehicle(String patente) async {
+    final response = await http.post(
+      Uri.parse('http://204.48.31.201:8080/estacionamiento/insert/pago'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+          <String, String>{'patente': patente, 'estacionamiento_id': '3'}),
     );
 
     if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
+      print(response.body);
+      print(response.statusCode);
+      print(jsonDecode(response.body));
+      print(jsonDecode(response.body)['valorTotal']);
 
-      for (var arrear in jsonData) {
-        arrears.add(arrear);
-      }
-    } else {}
+      return jsonDecode(response.body)['valorTotal'].toString();
+    } else {
+      print(response.body);
+      print(response.statusCode);
+      return response.body;
+    }
+  }
 
-    return arrears;
+  Future<String> insertVehicle(String patente) async {
+    final response = await http.post(
+      Uri.parse('http://204.48.31.201:8080/estacionamiento/insert/estacionado'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+          <String, String>{'patente': patente, 'estacionamiento_id': '3'}),
+    );
+
+    if (response.statusCode == 200) {
+      return 'Vehiculo estacionado';
+    } else {
+      return (response.body);
+    }
   }
 }

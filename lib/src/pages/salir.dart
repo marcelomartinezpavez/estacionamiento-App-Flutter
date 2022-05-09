@@ -1,8 +1,5 @@
-import 'dart:async';
-import 'dart:convert';
-
+import 'package:estacionamiento/src/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class SalirPage extends StatefulWidget {
   const SalirPage({Key? key}) : super(key: key);
@@ -17,76 +14,54 @@ class salir extends State<SalirPage> {
   String _patente = '';
   int valorTotal = 0;
 
-  Future<dynamic> _toPayVehicle() async {
-    final response = await http.post(
-      Uri.parse('http://204.48.31.201:8080/estacionamiento/insert/pago'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-          <String, String>{'patente': _patente, 'estacionamiento_id': '3'}),
-    );
-
-    if (response.statusCode == 200) {
-      print(response.body);
-      print(response.statusCode);
-      print(jsonDecode(response.body));
-      print(jsonDecode(response.body)['valorTotal']);
-
-      _data = response.body;
-      setState(() {
-        valorTotal = jsonDecode(response.body)['valorTotal'];
-        _data = 'El valor a cancelar para el vehiculo ' +
-            _patente +
-            ' es: ' +
-            valorTotal.toString();
-      });
-    } else {
-      print(response.body);
-      print(response.statusCode);
-
-      _data = response.body;
-      setState(() {
-        _data = response.body;
-      });
-    }
-  }
+  Api_Service api = Api_Service();
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text("Pagar"),
+          title: const Text("Pagar", style: TextStyle(color: Colors.orange)),
+          backgroundColor: Colors.orange.shade100,
         ),
         // drawer: NavDrawer(),
         //body: Center(child: Text("This is salir page")));
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Ingrese patente del Vehiculo que pagara',
-              ),
-              TextField(
-                onChanged: (text) {
-                  setState(() {
-                    _patente = text;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Patente',
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Ingrese patente del Vehiculo que pagara',
                 ),
-              ),
-              ElevatedButton(
-                onPressed: _toPayVehicle,
-                child: Text('Salir'),
-              ),
-              Text(
-                '$_data',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+                TextField(
+                  onChanged: (text) {
+                    setState(() {
+                      _patente = text;
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Patente',
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    var response = await this.api.toPayVehicle(this._patente);
+                    print(response);
+
+                    setState(() {
+                      this._data = response;
+                    });
+                  },
+                  child: const Text('Salir'),
+                ),
+                Text(
+                  '$_data',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
           ),
         ));
   }

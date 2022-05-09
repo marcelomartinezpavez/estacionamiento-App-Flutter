@@ -31,7 +31,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ConfigurationPage(),
+          builder: (context) => const ConfigurationPage(),
         ),
         // MaterialPageRoute<void>(
         //   builder: (BuildContext context) => ConfigurationPage(),
