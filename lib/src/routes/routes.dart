@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 //import 'package:ptu/src/pages/area_or_hability_detail_page.dart';
 import 'package:estacionamiento/src/pages/auth/auth_layout.dart';
-import 'package:estacionamiento/src/pages/auth/login_page.dart';
+import 'package:estacionamiento/src/pages/home_layout.dart';
+import 'package:flutter/material.dart';
+
 //import 'package:ptu/src/pages/examen_page.dart';
 //import 'package:ptu/src/pages/home_page.dart';
 //import 'package:ptu/src/pages/subject_overview_page.dart';
@@ -9,53 +10,28 @@ import 'package:estacionamiento/src/pages/auth/login_page.dart';
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
-   // '/': (BuildContext context) => HomePage(),
+    '/': (BuildContext context) => const HomeLayout(),
     // 'profile': (BuildContext context) => ProfilePage(),
-    'auth': (BuildContext context) => AuthLayout(),
-   // 'subject_overview': (BuildContext context) => SubjectOverviewPage(
-   //     argument: ModalRoute.of(context)!.settings.arguments),
-   // 'area_or_hability_detail': (BuildContext context) => AreaOrHabilityDetailPage(
-   //     argument: ModalRoute.of(context)!.settings.arguments),
-   // 'examen': (BuildContext context) =>
-   //     ExamenPage(argument: ModalRoute.of(context)!.settings.arguments),
-   // 'terms': (BuildContext context) => TermsPage(),
+    // '/': (BuildContext context) => HomePage(),
+    // 'profile': (BuildContext context) => ProfilePage(),
+    'auth': (BuildContext context) => const AuthLayout(),
+    // 'subject_overview': (BuildContext context) => SubjectOverviewPage(
+    //     argument: ModalRoute.of(context)!.settings.arguments),
+    // 'area_or_hability_detail': (BuildContext context) => AreaOrHabilityDetailPage(
+    //     argument: ModalRoute.of(context)!.settings.arguments),
+    // 'examen': (BuildContext context) =>
+    //     ExamenPage(argument: ModalRoute.of(context)!.settings.arguments),
+    // 'terms': (BuildContext context) => TermsPage(),
   };
 }
 
 goLogin(context) {
-  Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
-  Navigator.pushNamed(context, 'login');
+  Navigator.pushReplacementNamed(context, 'auth');
+  // Navigator.pushNamed(context, 'auth');
 }
 
 goHome(context) {
   Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  //Navigator.pushNamed(context, 'login');
-}
-
-
-
-goArrears(context) {
-  Navigator.pushNamedAndRemoveUntil(context, 'arrears', (route) => false);
-  //Navigator.pushNamed(context, 'login');
-}
-
-goInternalProtocols(context) {
-  Navigator.pushNamedAndRemoveUntil(context, 'protocols', (route) => false);
-  //Navigator.pushNamed(context, 'login');
-}
-
-goJustification(context) {
-  Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  //Navigator.pushNamed(context, 'login');
-}
-
-goReports(context) {
-  Navigator.pushNamedAndRemoveUntil(context, 'reports', (route) => false);
-  //Navigator.pushNamed(context, 'login');
-}
-
-goHistory(context) {
-  Navigator.pushNamedAndRemoveUntil(context, 'history', (route) => false);
   //Navigator.pushNamed(context, 'login');
 }
 

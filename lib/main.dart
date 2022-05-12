@@ -1,22 +1,15 @@
-import 'package:estacionamiento/login.dart';
-import 'package:estacionamiento/salir.dart';
+import 'package:estacionamiento/src/app.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 //import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+/*
 
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -28,10 +21,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Estacionamiento'),
-
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -43,11 +36,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class NavDrawer extends StatelessWidget {
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -65,16 +53,16 @@ class NavDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => Login()));
+                  builder: (BuildContext context) => AuthLayout()));
             },
           ),
-
           ListTile(
             title: Text('Entrar estacionamiento'),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => MyHomePage(title: 'Estacionamiento')));
+                  builder: (BuildContext context) =>
+                      MyHomePage(title: 'Estacionamiento')));
             },
           ),
           ListTile(
@@ -82,10 +70,10 @@ class NavDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => SalirPage(title: 'Salir')));
+                  builder: (BuildContext context) =>
+                      SalirPage(title: 'Salir')));
             },
           ),
-
         ],
       ),
     );
@@ -93,7 +81,6 @@ class NavDrawer extends StatelessWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   bool isLoggedIn = false;
 
   void autoLogIn() async {
@@ -102,11 +89,11 @@ class _MyHomePageState extends State<MyHomePage> {
     //final String? idEmpresa = prefs.getString('idEmpresa');
     //final String? nameEmpresa = prefs.getString('nameEmpresa');
     //if (userId != null) {
-      setState(() {
-        isLoggedIn = true;
-        //name = userId;
-      });
-      return;
+    setState(() {
+      isLoggedIn = true;
+      //name = userId;
+    });
+    return;
     //}
   }
 
@@ -128,40 +115,32 @@ class _MyHomePageState extends State<MyHomePage> {
     autoLogIn();
   }
 
-
-
   String _data = '';
   String _patente = '';
 
-  Future<dynamic> _insertVehicle() async{
-
+  Future<dynamic> _insertVehicle() async {
     final response = await http.post(
-        Uri.parse('http://204.48.31.201:8080/estacionamiento/insert/estacionado')
-      ,
+      Uri.parse('http://204.48.31.201:8080/estacionamiento/insert/estacionado'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        'patente': _patente,
-        'estacionamiento_id': '3'
-      }),);
+      body: jsonEncode(
+          <String, String>{'patente': _patente, 'estacionamiento_id': '3'}),
+    );
 
     if (response.statusCode == 200) {
       _data = 'Vehiculo estacionado!';
       setState(() {
         _data = 'Vehiculo estacionado!';
-
       });
-    }else {
+    } else {
       print(response.body);
       print(response.statusCode);
 
       _data = response.body;
       setState(() {
         _data = response.body;
-
       });
-
     }
   }
 
@@ -181,7 +160,6 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Ingrese patente del Vehiculo que ingresa',
             ),
-
             TextField(
               onChanged: (text) {
                 setState(() {
@@ -192,19 +170,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 border: OutlineInputBorder(),
                 hintText: 'Patente',
               ),
-
             ),
-
             ElevatedButton(
               onPressed: _insertVehicle,
               child: Text('Ingresar'),
             ),
-
             Text(
               '$_data',
               style: Theme.of(context).textTheme.headline4,
             ),
-
           ],
         ),
       ),
@@ -212,3 +186,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/

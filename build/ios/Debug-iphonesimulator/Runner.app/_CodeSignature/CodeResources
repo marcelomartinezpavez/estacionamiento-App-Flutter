@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		e11OJ8Kj4zvHFvmEL4FHw4sArRs=
+		680JmzmqlrQ+LPZkW8kW78qzLEQ=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		LPuMReJ97+Jgs02OB9V/61hH4HM=
+		/1as1J0GGW4qpIZD2FfvcJqlCgw=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		PqXYRsGZKssxvzAjYrMnpAMqAWw=
+		WQDu/qevveUJG268IbEZNqqy22Y=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		06W9GFiYNy8gW8vZTxmCDUvO4y8=
+		25TjRk1kkW+UG7hsTD9mXH1oz94=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -78,7 +78,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		AnH2mtYiZGLpTtsIhxlnW+SLqtU=
+		G9ETE1sWdY34F/grqkO2wnf+c5c=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>Frameworks/Flutter.framework/Flutter</key>
 		<data>
-		V9SGwuBhsEWQCBAzEbzfNI20hxA=
+		iRUqMkxJdYLWSVRVpClM4vms1WQ=
 		</data>
 		<key>Frameworks/Flutter.framework/Headers/Flutter.h</key>
 		<data>
@@ -166,15 +166,75 @@
 		</data>
 		<key>Frameworks/Flutter.framework/_CodeSignature/CodeResources</key>
 		<data>
-		eYIjjgcvKhYGE/2nzCtDZD28hJE=
+		EbXdNzo1LH3UT25VRacmz2h619E=
 		</data>
 		<key>Frameworks/Flutter.framework/icudtl.dat</key>
 		<data>
 		1QumeTTkdhWvmY7i40QoJewEapE=
 		</data>
+		<key>Frameworks/Reachability.framework/Info.plist</key>
+		<data>
+		53zmp9ljC5tQ7vghIxleOR60HE4=
+		</data>
+		<key>Frameworks/Reachability.framework/Reachability</key>
+		<data>
+		p09qTW0ahp95hnUaNRpuo7tXWEQ=
+		</data>
+		<key>Frameworks/Reachability.framework/_CodeSignature/CodeResources</key>
+		<data>
+		oJuYXyo5SGvkZwdfEGhG8P1tBNc=
+		</data>
+		<key>Frameworks/connectivity_plus.framework/Info.plist</key>
+		<data>
+		YTuxS/Wjd2GsKhwwL+L/U/5Rxm4=
+		</data>
+		<key>Frameworks/connectivity_plus.framework/_CodeSignature/CodeResources</key>
+		<data>
+		0zW+9oYJgy5py8lZ7vdMLPIs1Bs=
+		</data>
+		<key>Frameworks/connectivity_plus.framework/connectivity_plus</key>
+		<data>
+		B2WqycAFZditP3cXmZIz3W9/1Yc=
+		</data>
+		<key>Frameworks/package_info_plus.framework/Info.plist</key>
+		<data>
+		55Wxec+xKeYB0Ci64WuvG9BHcEc=
+		</data>
+		<key>Frameworks/package_info_plus.framework/_CodeSignature/CodeResources</key>
+		<data>
+		oT3aB4+gnzuIOl/PKHcIfAanuRI=
+		</data>
+		<key>Frameworks/package_info_plus.framework/package_info_plus</key>
+		<data>
+		I+Ot+M3Hz68TEgX7pqljKJe6LSc=
+		</data>
+		<key>Frameworks/path_provider_ios.framework/Info.plist</key>
+		<data>
+		3jLc+pUfRbQnzloHfO/itLZdTZE=
+		</data>
+		<key>Frameworks/path_provider_ios.framework/_CodeSignature/CodeResources</key>
+		<data>
+		9uZ1zc6guGRH0c1ec6bguPGVt+U=
+		</data>
+		<key>Frameworks/path_provider_ios.framework/path_provider_ios</key>
+		<data>
+		85/uXtM9K3MSzgn6oCjd4MDsC74=
+		</data>
+		<key>Frameworks/shared_preferences_ios.framework/Info.plist</key>
+		<data>
+		SZvVz07lsVRxazQsPVyAIdCjFCg=
+		</data>
+		<key>Frameworks/shared_preferences_ios.framework/_CodeSignature/CodeResources</key>
+		<data>
+		gTtIJc8Pne4Lz3izmkDs7y0X4dY=
+		</data>
+		<key>Frameworks/shared_preferences_ios.framework/shared_preferences_ios</key>
+		<data>
+		Hcm4OrDTnlmaR+VcctzT5w5IpFQ=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		2t9n8vRSwHFG4GzfODcBLtuFt2A=
+		1KtepWlBBeBgfa0FwOYEZMNJIQk=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -208,7 +268,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HHdSTARoGevbZJPdA2n4wfBsdPBf/EtlemNusN+oiCI=
+			syVVDm1O90uq/yJ8zSXj4ahccdnxz9wp73tL6EJEhFA=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -257,7 +317,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0RqVkP+DKuzYdrIPko54EpPBIDqKK/ChaDlZ+SBEiL4=
+			DOsoxGvspNounNidvZJ223vFWmCiOMlQ80+gM0ihsK4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -271,7 +331,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BSZS5Q3NXXJ90IDmNxyfnzAk5Qs0vQI0pSAp9TYAX28=
+			vrZA2S2BXlNG9WoAe1hvV89oQPnBoO0o2A4RpUCUNtc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
@@ -292,7 +352,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			CrjORQO4PuEhe4OqJcDRDYXVkqY9RMoFtvZw3Z2am6I=
+			vOx88fb32nELjoI5pFDTmVYBWtoLEZrf9NAu3WD578k=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -313,7 +373,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sfhzqIon9tQ7g07CE2bNh8urBV3U76fskW6pZHSc3p8=
+			MgwFkq2tMyc0LS59DD8KkbJE6V0IlEglHZsFoVJyMPg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -334,7 +394,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5tumEIa8VxcbcgG6jNsoOGFlgDkB5JsjFl1jpO/e/kc=
+			BpezsdNzCsxrcuTkf7mZdOLrBrRQBpLwzl9+K0VI8KQ=
 			</data>
 		</dict>
 		<key>Frameworks/Flutter.framework/Headers/Flutter.h</key>
@@ -467,7 +527,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3XExzvQK9sWsu5UDy5d2TXUBs5qkCY74kySnREVpWIQ=
+			jggWmr1+LxxjJXLof8CVWeSc6CfP2+FLeJ9btOEfOXM=
 			</data>
 		</dict>
 		<key>Frameworks/Flutter.framework/icudtl.dat</key>
@@ -475,6 +535,111 @@
 			<key>hash2</key>
 			<data>
 			Y7sS66zRuTsBvhoY8E7AmSrn+3DMMIOCUocmE2apBcw=
+			</data>
+		</dict>
+		<key>Frameworks/Reachability.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			fgYKIfDQQW/yufSKZB+IuWn9auADTXAoNpc5pXFrl2Q=
+			</data>
+		</dict>
+		<key>Frameworks/Reachability.framework/Reachability</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			t03CbVhjhGs4xCSKFJlpSlcqfxWxsLPIF4N1tVrje+k=
+			</data>
+		</dict>
+		<key>Frameworks/Reachability.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8/gQ69Wl2Ab022sa3mg+osJ5sSmwbB5rnECiyrBV068=
+			</data>
+		</dict>
+		<key>Frameworks/connectivity_plus.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zSsYsIvUKqyS1CwVyydad4UzmXaFhnRC0SkBX72QGdE=
+			</data>
+		</dict>
+		<key>Frameworks/connectivity_plus.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YMZtgJpDZ2CFWPokqfnPRparAG9wFMrrBxHyvYLVFr0=
+			</data>
+		</dict>
+		<key>Frameworks/connectivity_plus.framework/connectivity_plus</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LBQShyaM7H7vC2xD7vZ1Dc+xz5byTl10w8kD4ZbZUSo=
+			</data>
+		</dict>
+		<key>Frameworks/package_info_plus.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			pjJYHWYwHm2cmcYIDEN0canlO9wmy0y8E4Um0LiyQsQ=
+			</data>
+		</dict>
+		<key>Frameworks/package_info_plus.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Yy1HeygnO49m1gp3rYEhyk5DWPNX7d4+CKRF7HO/dhI=
+			</data>
+		</dict>
+		<key>Frameworks/package_info_plus.framework/package_info_plus</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			i94W19Vz7Xe/Mqr2jwACV1kt1ht6MQmrGq9m4ckEX0Y=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_ios.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rQV0+23Eu6JqBL2xq2Fy2EZn+3cYTPVkJUx96oAvioo=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_ios.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IaFsWTNsoQmWaOACb6OPr69fngPf7Yr+XuNJtmtj3X4=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_ios.framework/path_provider_ios</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8zenZqmEyhSmqZ4zk5weNxQ/9e9tg+u9setY9JHBpNo=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_ios.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4TRR+AKldet6shBwOhCysqZ+qb8l3ZjmHUHkJyYEP1I=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_ios.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QrP8dzEh4LtQmjhOJjR7CMKZgxwRKZCTdh+YHn/KKrA=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_ios.framework/shared_preferences_ios</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5N/OZDii2CYsd0ptrn2bwfLXGxdEhmXRn804kSqaZFs=
 			</data>
 		</dict>
 	</dict>
