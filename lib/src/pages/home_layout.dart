@@ -13,8 +13,8 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-  Auth_Service _auth = new Auth_Service();
-  Api_Service _api = new Api_Service();
+  final Auth_Service _auth = Auth_Service();
+  final Api_Service _api = Api_Service();
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   // ejecutar una funcion cada vez que se carga la pagina
 
   Future<void> getConfig() async {
-    var userHasConfig = await this._api.userHasConfig();
+    var userHasConfig = await _api.userHasConfig();
 
     if (!userHasConfig) {
       Navigator.push(
@@ -46,16 +46,17 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Estacionamiento'),
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  _auth.signOut(context);
-                },
-                child: const Text('Cerrar sesión'))
-          ],
-        ),
+        appBar: AppBar(title: const Text('Estacionamiento'), actions: [
+          Tooltip(
+            message: 'Cerrar sesión',
+            child: IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                _auth.signOut(context);
+              },
+            ),
+          )
+        ]),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
