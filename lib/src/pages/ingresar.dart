@@ -18,47 +18,48 @@ class _IngresarState extends State<Ingresar> {
     return Scaffold(
       // drawer: NavDrawer(),
 
-      appBar: AppBar(
-        title: const Text('Ingresar vehículo',
-            style: TextStyle(color: Colors.green)),
-        backgroundColor: Colors.green.shade100,
-      ),
+      appBar: AppBar(title: const Text('Ingresar vehículo')),
 
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'Ingrese patente del Vehiculo que ingresa',
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                "Ingrese patente del Vehiculo que ingresa",
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
-              TextField(
-                onChanged: (text) {
-                  setState(() {
-                    _patente = text;
-                  });
-                },
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Patente',
-                ),
+            ),
+            TextField(
+              onChanged: (text) {
+                setState(() {
+                  _patente = text;
+                });
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Patente',
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  var response = await api.insertVehicle(_patente);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(response),
-                    action: SnackBarAction(
-                      label: 'Ok',
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ));
-                },
-                child: const Text('Ingresar'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size.fromHeight(40), // fromHeight use double.infinity as width and 40 is the height
               ),
-            ],
-          ),
+              onPressed: () async {
+                var response = await api.insertVehicle(_patente);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(response),
+                  action: SnackBarAction(
+                    label: 'Ok',
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ));
+              },
+              child: const Text('Ingresar'),
+            ),
+          ],
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

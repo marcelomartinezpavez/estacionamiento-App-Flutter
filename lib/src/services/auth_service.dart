@@ -76,7 +76,6 @@ class Auth_Service {
     storage.deleteItem('userEstacionamiento');
     storage.deleteItem('username');
     storage.deleteItem('pass');
-    //TODO: Falta el hecho de efectivamente cerrar la sesión
     goLogin(context);
   }
 }

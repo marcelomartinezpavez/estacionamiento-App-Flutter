@@ -19,50 +19,59 @@ class salir extends State<SalirPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Pagar", style: TextStyle(color: Colors.orange)),
-          backgroundColor: Colors.orange.shade100,
-        ),
-        // drawer: NavDrawer(),
-        //body: Center(child: Text("This is salir page")));
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Ingrese patente del Vehiculo que pagara',
-                ),
-                TextField(
-                  onChanged: (text) {
-                    setState(() {
-                      _patente = text;
-                    });
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Patente',
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    var response = await this.api.toPayVehicle(this._patente);
-                    print(response);
-
-                    setState(() {
-                      this._data = response;
-                    });
-                  },
-                  child: const Text('Salir'),
-                ),
-                Text(
-                  '$_data',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
+      appBar: AppBar(
+        title: const Text("Pagar", style: TextStyle(color: Colors.orange)),
+        backgroundColor: Colors.orange.shade100,
+      ),
+      // drawer: NavDrawer(),
+      //body: Center(child: Text("This is salir page")));
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                "Ingrese patente del Vehiculo que sale",
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-        ));
+            TextField(
+              onChanged: (text) {
+                setState(() {
+                  _patente = text;
+                });
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Patente',
+              ),
+            ),
+            _data != ''
+                ? Text(
+                    '$_data',
+                    style: Theme.of(context).textTheme.headline4,
+                  )
+                : Container(),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size.fromHeight(
+                    40), // fromHeight use double.infinity as width and 40 is the height
+              ),
+              onPressed: () async {
+                var response = await this.api.toPayVehicle(this._patente);
+                print(response);
+
+                setState(() {
+                  this._data = response;
+                });
+              },
+              child: const Text('Sacar vehículo'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:estacionamiento/src/model/login_model.dart';
 import 'package:estacionamiento/src/routes/routes.dart';
 import 'package:estacionamiento/src/services/auth_service.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LogInPage extends StatefulWidget {
@@ -21,48 +20,41 @@ class _LogInPagePageState extends State<LogInPage> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          Container(
-            width: size.width * 0.85,
-            padding: const EdgeInsets.symmetric(vertical: 30.0),
-            margin: const EdgeInsets.symmetric(vertical: 15.0),
-            decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-                borderRadius: BorderRadius.circular(5.0),
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 3.0,
-                      color: Theme.of(context).shadowColor,
-                      offset: const Offset(0.0, 5.0),
-                      spreadRadius: 3.0)
-                ]),
-            child: Column(
-              children: [
-                Form(
-                    key: logInKey,
-                    child: Column(
-                      children: <Widget>[
-                        const Text(
-                          'Iniciar Sesión',
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        const SizedBox(
-                          height: 30.0,
-                        ),
-                        _rednerInputUsername(),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        _rednerInputPassword(),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        _renderButtonLogIn(),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                      ],
-                    )),
-              ],
+          Card(
+            elevation: 12,
+            child: Container(
+              width: size.width * 0.85,
+              padding: const EdgeInsets.symmetric(vertical: 30.0),
+              margin: const EdgeInsets.symmetric(vertical: 15.0),
+              child: Column(
+                children: [
+                  Form(
+                      key: logInKey,
+                      child: Column(
+                        children: <Widget>[
+                          const Text(
+                            'Iniciar Sesión',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                          const SizedBox(
+                            height: 30.0,
+                          ),
+                          _rednerInputUsername(),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          _rednerInputPassword(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          _renderButtonLogIn(),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                        ],
+                      )),
+                ],
+              ),
             ),
           ),
           // RichText(
@@ -96,8 +88,7 @@ class _LogInPagePageState extends State<LogInPage> {
                 Icons.person,
                 color: Colors.greenAccent,
               ),
-              hintText: 'ejemplo@correo.cl',
-              labelText: 'Correo'),
+              labelText: 'Nombre de usuario'),
           keyboardType: TextInputType.text,
           textCapitalization: TextCapitalization.sentences,
           validator: (value) {
