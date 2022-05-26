@@ -49,6 +49,7 @@ class _IngresarState extends State<Ingresar> {
               ),
               onPressed: () async {
                 var response = await api.insertVehicle(_patente);
+                await this.api.userHasConfig();
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(response),
                   action: SnackBarAction(
@@ -57,6 +58,7 @@ class _IngresarState extends State<Ingresar> {
                   ),
                 ));
               },
+
               child: const Text('Ingresar'),
             ),
           ],

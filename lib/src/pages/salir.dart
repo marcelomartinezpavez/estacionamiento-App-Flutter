@@ -66,6 +66,7 @@ class salir extends State<SalirPage> {
                 setState(() {
                   this._data = response;
                 });
+                await this.api.userHasConfig();
               },
               child: const Text('Sacar vehículo'),
             ),
