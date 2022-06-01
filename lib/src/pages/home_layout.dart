@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:estacionamiento/src/pages/estacionados.dart';
 import 'package:estacionamiento/src/pages/ingresar.dart';
 import 'package:estacionamiento/src/pages/salir.dart';
 import 'package:estacionamiento/src/services/api_service.dart';
@@ -223,7 +224,67 @@ class _HomeLayoutState extends State<HomeLayout> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => EstacionadosPage(),
+                            fullscreenDialog: true,
+                          )).then((value) => getConfig()),
+
+                      child: Card(
+                        color: Colors.yellowAccent.shade100,
+                        child: Column(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                    margin:  EdgeInsets.all(10),
+                                    width: 80,
+                                    height: 80,
+                                    //alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child:  Icon(Icons.directions_car,
+                                        size: 40, color: Colors.black)),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text('Historial estacionados',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.orange,
+                                            fontSize: 18)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+
             ],
           ),
         ));

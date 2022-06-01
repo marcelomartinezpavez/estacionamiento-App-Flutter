@@ -87,4 +87,25 @@ class Api_Service {
       return (response.body);
     }
   }
+
+  Future getEstacionado() async {
+    await userHasConfig();
+    print('ESTACIONADO _estacionamientoId ==>: '+ _estacionamientoId);
+
+    final response = await http.get(
+      Uri.parse('http://204.48.31.201:8080/estacionado/idEstacionamiento/'+_estacionamientoId),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('ESTACIONADO response.body');
+      print(response.body);
+      return jsonDecode(response.body);
+    } else {
+      return (response.body);
+    }
+  }
+
 }
