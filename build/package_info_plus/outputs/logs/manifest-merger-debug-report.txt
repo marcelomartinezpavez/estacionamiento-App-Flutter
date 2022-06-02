@@ -1,0 +1,19 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml:1:1-2:12
+INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml:1:1-2:12
+INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml:1:1-2:12
+	package
+		ADDED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml:1:11-58
+		INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
+		INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml:1:1-2:12
+uses-sdk
+INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
+INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
+		ADDED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
+		INJECTED from /usr/local/Caskroom/flutter/2.10.5/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.2/android/src/main/AndroidManifest.xml
