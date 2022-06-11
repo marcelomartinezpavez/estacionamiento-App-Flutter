@@ -5,10 +5,12 @@ class SalirPage extends StatefulWidget {
   const SalirPage({Key? key}) : super(key: key);
 
   @override
-  State<SalirPage> createState() => salir();
+  State<SalirPage> createState() => Salir();
 }
 
-class salir extends State<SalirPage> {
+class Salir extends State<SalirPage> {
+  final GlobalKey<FormState> salirFormKey = GlobalKey<FormState>();
+
   static const String routeName = '/salir';
   String _data = '';
   String _patente = '';
@@ -37,37 +39,47 @@ class salir extends State<SalirPage> {
                 style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
             ),
-            TextField(
-              onChanged: (text) {
-                setState(() {
-                  _patente = text;
-                });
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Patente',
-              ),
-            ),
+            Form(
+                key: salirFormKey,
+                autovalidateMode: AutovalidateMode.always,
+                child: TextFormField(
+                  onChanged: (text) {
+                    setState(() {
+                      _patente = text;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.length <= 4) {
+                      return 'Por favor ingrese una patente';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Patente',
+                  ),
+                )),
             _data != ''
                 ? Text(
-                    '$_data',
+                    _data,
                     style: Theme.of(context).textTheme.headline4,
                   )
                 : Container(),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size.fromHeight(
+                minimumSize: const Size.fromHeight(
                     40), // fromHeight use double.infinity as width and 40 is the height
               ),
-              onPressed: () async {
-                var response = await this.api.toPayVehicle(this._patente);
-                print(response);
+              onPressed: _patente.length >= 5
+                  ? () async {
+                      var response = await api.toPayVehicle(_patente);
 
-                setState(() {
-                  this._data = response;
-                });
-                await this.api.userHasConfig();
-              },
+                      setState(() {
+                        _data = response;
+                      });
+                      await api.userHasConfig();
+                    }
+                  : null,
               child: const Text('Sacar vehículo'),
             ),
           ],

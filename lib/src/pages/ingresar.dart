@@ -10,6 +10,8 @@ class Ingresar extends StatefulWidget {
 }
 
 class _IngresarState extends State<Ingresar> {
+  final GlobalKey<FormState> ingresarFormKey = GlobalKey<FormState>();
+
   String _patente = '';
   Api_Service api = Api_Service();
 
@@ -32,33 +34,44 @@ class _IngresarState extends State<Ingresar> {
                 style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
             ),
-            TextField(
-              onChanged: (text) {
-                setState(() {
-                  _patente = text;
-                });
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Patente',
-              ),
-            ),
+            Form(
+                key: ingresarFormKey,
+                autovalidateMode: AutovalidateMode.always,
+                child: TextFormField(
+                  onChanged: (text) {
+                    setState(() {
+                      _patente = text;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.length <= 4) {
+                      return 'Por favor ingrese una patente';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Patente',
+                  ),
+                )),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size.fromHeight(40), // fromHeight use double.infinity as width and 40 is the height
+                minimumSize: const Size.fromHeight(
+                    40), // fromHeight use double.infinity as width and 40 is the height
               ),
-              onPressed: () async {
-                var response = await api.insertVehicle(_patente);
-                await this.api.userHasConfig();
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(response),
-                  action: SnackBarAction(
-                    label: 'Ok',
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ));
-              },
-
+              onPressed: _patente.length >= 5
+                  ? () async {
+                      var response = await api.insertVehicle(_patente);
+                      await api.userHasConfig();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(response),
+                        action: SnackBarAction(
+                          label: 'Ok',
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ));
+                    }
+                  : null,
               child: const Text('Ingresar'),
             ),
           ],
