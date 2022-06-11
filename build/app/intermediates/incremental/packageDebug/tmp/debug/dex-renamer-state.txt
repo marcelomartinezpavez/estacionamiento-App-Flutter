@@ -1,0 +1,4 @@
+#Sat May 14 13:18:03 CLT 2022
+base.0=/Users/marcelomartinez/proyectos/Estacionamiento/estacionamiento-app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
