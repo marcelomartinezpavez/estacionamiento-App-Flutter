@@ -20,7 +20,10 @@ class _IngresarState extends State<Ingresar> {
     return Scaffold(
       // drawer: NavDrawer(),
 
-      appBar: AppBar(title: const Text('Ingresar vehículo')),
+      appBar: AppBar(
+        title: const Text("Ingresar", style: TextStyle(color: Colors.green)),
+        backgroundColor: Colors.green.shade100,
+      ),
 
       body: Padding(
         padding: const EdgeInsets.all(8.0),

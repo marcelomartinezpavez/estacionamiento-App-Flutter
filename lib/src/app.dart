@@ -1,12 +1,16 @@
-import 'package:estacionamiento/src/routes/routes.dart';
 import 'package:estacionamiento/src/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import 'routes/routes.dart' as route;
+
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
   _AppState createState() => _AppState();
 }
 
-Widget SomethingWentWrong(context) {
+Widget somethingWentWrong(context) {
   final GlobalKey<_AppState> somethingWentWrongKey = new GlobalKey<_AppState>();
 
   return MaterialApp(
@@ -19,15 +23,15 @@ Widget SomethingWentWrong(context) {
   );
 }
 
-Widget Loading(context) {
-  final GlobalKey<_AppState> loadingKey = new GlobalKey<_AppState>();
+Widget loading(context) {
+  final GlobalKey<_AppState> loadingKey = GlobalKey<_AppState>();
 
   return MaterialApp(
     key: loadingKey,
     debugShowCheckedModeBanner: false,
     builder: (context, child) => Container(
         color: Colors.blue,
-        child: Scaffold(
+        child: const Scaffold(
           body: Center(
               child: Text(
             'Cargando',
@@ -72,30 +76,40 @@ class _AppState extends State<MyApp> {
 
     // Show error message if initialization failed
     if (_error) {
-      return SomethingWentWrong(context);
+      return somethingWentWrong(context);
     }
     // Show a loader until FlutterFire is initialized
     if (!_initialized) {
       print('Loading...');
-      return Loading(context);
+      return loading(context);
     }
 
-    final GlobalKey<_AppState> homeAux = new GlobalKey<_AppState>();
+    final GlobalKey<_AppState> homeAux = GlobalKey<_AppState>();
 
     if (_initialized) {
       return MaterialApp(
-          key: homeAux,
-          debugShowCheckedModeBanner: false,
-          routes: getApplicationRoutes(),
-          initialRoute: _autenticated ? '/' : 'auth',
-          onUnknownRoute: (RouteSettings settings) => MaterialPageRoute(
-              builder: (context) => SomethingWentWrong(context)),
-          // initialRoute: _autenticated ? 'justification' : 'justification',
-          // home: HomePage(), //this is the calling screen
-          // onGenerateRoute: (RouteSettings settings) =>
-          // MaterialPageRoute(builder: (BuildContext context) => HomePage()),
-          theme: ThemeData(primaryColor: Colors.green));
+        key: homeAux,
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: route.controller,
+        // initialRoute: route.authPage,
+        // routes: getApplicationRoutes(),
+        initialRoute: _autenticated ? route.homePage : route.authPage,
+        // onUnknownRoute: (RouteSettings settings) => MaterialPageRoute(
+        //     builder: (context) => somethingWentWrong(context)),
+
+        // initialRoute: _autenticated ? 'justification' : 'justification',
+        // home: HomePage(), //this is the calling screen
+        // onGenerateRoute: (RouteSettings settings) =>
+        // MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+        theme: ThemeData(
+            primaryColor: Colors.orange,
+            buttonTheme: const ButtonThemeData(
+                buttonColor: Colors.orange, textTheme: ButtonTextTheme.primary),
+            useMaterial3: true,
+            appBarTheme: const AppBarTheme(color: Colors.blue)),
+        themeMode: ThemeMode.system,
+      );
     }
-    return SomethingWentWrong(context);
+    return somethingWentWrong(context);
   }
 }

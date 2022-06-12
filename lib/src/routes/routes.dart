@@ -3,13 +3,26 @@ import 'package:estacionamiento/src/pages/auth/auth_layout.dart';
 import 'package:estacionamiento/src/pages/home_layout.dart';
 import 'package:flutter/material.dart';
 
-//import 'package:ptu/src/pages/examen_page.dart';
-//import 'package:ptu/src/pages/home_page.dart';
-//import 'package:ptu/src/pages/subject_overview_page.dart';
-//import 'package:ptu/src/pages/terms_page.dart';
+// variable for our route names
+const String authPage = 'auth';
+const String homePage = '/';
+const String registerPage = 'register';
+// controller function with switch statement to control page route flow
+Route<dynamic> controller(RouteSettings settings) {
+  switch (settings.name) {
+    case authPage:
+      return MaterialPageRoute(builder: (context) => AuthLayout());
+    case homePage:
+      return MaterialPageRoute(builder: (context) => HomeLayout());
+
+    default:
+      throw ('this route name does not exist');
+  }
+}
 
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
+    '/': (BuildContext context) => const HomeLayout(),
     '/': (BuildContext context) => const HomeLayout(),
     // 'profile': (BuildContext context) => ProfilePage(),
     // '/': (BuildContext context) => HomePage(),

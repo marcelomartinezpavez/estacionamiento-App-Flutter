@@ -82,11 +82,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                                           width: 80,
                                           height: 80,
                                           //alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: Colors.lightBlue.shade100,
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                          ),
+
                                           child: const Icon(Icons.info_outline,
                                               size: 30, color: Colors.black)),
                                       Text(
@@ -194,12 +190,12 @@ class _HomeLayoutState extends State<HomeLayout> {
                                   padding: const EdgeInsets.all(10),
                                   child: const FittedBox(
                                     alignment: Alignment.centerLeft,
-                                    fit: BoxFit.scaleDown,
+                                    fit: BoxFit.cover,
                                     child: Text('Ingresar vehículo',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.green,
-                                            fontSize: 18)),
+                                            fontSize: 14)),
                                   ),
                                 ),
                               ],
@@ -243,12 +239,12 @@ class _HomeLayoutState extends State<HomeLayout> {
                                 Container(
                                   padding: const EdgeInsets.all(10),
                                   child: const FittedBox(
-                                    fit: BoxFit.scaleDown,
+                                    fit: BoxFit.cover,
                                     child: Text('Sacar vehículo',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.orange,
-                                            fontSize: 18)),
+                                            fontSize: 14)),
                                   ),
                                 ),
                               ],

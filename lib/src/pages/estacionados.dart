@@ -43,7 +43,7 @@ class estacionados extends State<EstacionadosPage> {
       appBar: AppBar(
         title:
             const Text("Estacionados", style: TextStyle(color: Colors.yellow)),
-        backgroundColor: Colors.yellowAccent.shade100,
+        backgroundColor: Colors.orange.shade500,
       ),
       // drawer: NavDrawer(),
       //body: Center(child: Text("This is salir page")));
@@ -59,19 +59,19 @@ class estacionados extends State<EstacionadosPage> {
   Widget _buildDetail() {
     return ListView.builder(
       itemCount: _data.length,
-
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
             title: Text('${_data[index]['patente']}'),
             subtitle: Text('${_data[index]['valorTotal']}'),
-            trailing: '${_data[index]['estado']}' == '1' ?Text('Pagado',style: TextStyle(
-              color: Colors.green[300],
-            )):Text('Estacionado',style: TextStyle(
-        color: Colors.red[300])),
-        leading: Text(
-                DateFormat('dd/MM/yyyy HH:mm').format(DateTime.parse('${_data[index]['fechaIngreso']}'))
-        ),
+            trailing: '${_data[index]['estado']}' == '1'
+                ? Text('Pagado',
+                    style: TextStyle(
+                      color: Colors.green[300],
+                    ))
+                : Text('Estacionado', style: TextStyle(color: Colors.red[300])),
+            leading: Text(DateFormat('dd/MM/yyyy HH:mm')
+                .format(DateTime.parse('${_data[index]['fechaIngreso']}'))),
           ),
         );
       },

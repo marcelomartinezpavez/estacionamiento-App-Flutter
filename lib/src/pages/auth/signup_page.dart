@@ -1,6 +1,6 @@
+import 'package:estacionamiento/src/model/signup_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:estacionamiento/src/model/signup_model.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -33,13 +33,13 @@ class _SignUpPageState extends State<SignUpPage> {
               children: <Widget>[
                 _createName(),
                 _createEmail(),
-                _createPassword(),
-                _createConfirmPassword(),
-                SizedBox(
-                  height: 20,
-                ),
-                // _createTermsLabel(context),
-                _createButtonSignIn()
+                // _createPassword(),
+                // _createConfirmPassword(),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // // _createTermsLabel(context),
+                // _createButtonSignIn()
               ],
             )),
       ),
