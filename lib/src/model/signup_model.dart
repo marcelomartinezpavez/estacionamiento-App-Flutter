@@ -10,32 +10,37 @@ String signUpToJson(SignUp data) => json.encode(data.toJson());
 
 class SignUp {
   SignUp({
-    required this.name,
-    required this.email,
-    required this.password,
+    required this.nombreEmpresa,
+    required this.users,
+    required this.pass,
     required this.confirmPassword,
-    required this.acceptTerms,
+    required this.direccionEmpresa,
+    required this.rutEmpresa,
   });
 
-  String name;
-  String email;
-  String password;
+  String nombreEmpresa;
+  String users;
+  String pass;
   String confirmPassword;
-  String acceptTerms;
+  String direccionEmpresa;
+  String rutEmpresa;
+  String rol = "Admin";
 
   factory SignUp.fromJson(Map<String, dynamic> json) => SignUp(
-    name: json["name"],
-    email: json["email"],
-    password: json["password"],
-    confirmPassword: json["confirmPassword"],
-    acceptTerms: json["acceptTerms"],
-  );
+        nombreEmpresa: json["nombreEmpresa"],
+        users: json["users"],
+        pass: json["pass"],
+        confirmPassword: json["confirmPassword"],
+        direccionEmpresa: json["direccionEmpresa"],
+        rutEmpresa: json["rutEmpresa"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "email": email,
-    "password": password,
-    "confirmPassword": confirmPassword,
-    "acceptTerms": acceptTerms,
-  };
+        "nombreEmpresa": nombreEmpresa,
+        "users": users,
+        "pass": pass,
+        "confirmPassword": confirmPassword,
+        "direccionEmpresa": direccionEmpresa,
+        "rutEmpresa": rutEmpresa,
+      };
 }

@@ -36,7 +36,7 @@ class _AuthLayoutState extends State<AuthLayout> {
       ),
       body: <Widget>[
         Center(child: LogInPage()),
-        SignUpPage()
+        Center(child: SignUpPage())
       ][currentPageIndex],
     );
   }

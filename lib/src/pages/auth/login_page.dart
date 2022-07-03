@@ -4,6 +4,8 @@ import 'package:estacionamiento/src/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class LogInPage extends StatefulWidget {
+  const LogInPage({Key? key}) : super(key: key);
+
   @override
   _LogInPagePageState createState() => _LogInPagePageState();
 }
@@ -39,11 +41,11 @@ class _LogInPagePageState extends State<LogInPage> {
                           const SizedBox(
                             height: 30.0,
                           ),
-                          _rednerInputUsername(),
+                          _renderInputUsername(),
                           const SizedBox(
                             height: 10.0,
                           ),
-                          _rednerInputPassword(),
+                          _renderInputPassword(),
                           const SizedBox(
                             height: 20.0,
                           ),
@@ -78,9 +80,9 @@ class _LogInPagePageState extends State<LogInPage> {
     );
   }
 
-  Widget _rednerInputUsername() {
+  Widget _renderInputUsername() {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextFormField(
           initialValue: logIn.username,
           decoration: const InputDecoration(
@@ -104,9 +106,9 @@ class _LogInPagePageState extends State<LogInPage> {
         ));
   }
 
-  Widget _rednerInputPassword() {
+  Widget _renderInputPassword() {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextFormField(
           initialValue: logIn.password,
           decoration: const InputDecoration(
@@ -150,11 +152,11 @@ class _LogInPagePageState extends State<LogInPage> {
   }
 
   void _userLogIn(context) {
-    Auth_Service auth_service = Auth_Service();
+    Auth_Service authService = Auth_Service();
 
     if (logInKey.currentState!.validate()) {
       logInKey.currentState!.save();
-      auth_service.logIn(logIn).then((value) {
+      authService.logIn(logIn).then((value) {
         print(value);
         goHome(context);
       }).catchError((err) {

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 
 import '../model/login_model.dart';
+import '../model/signup_model.dart';
 import '../routes/routes.dart';
 
 class Auth_Service {
@@ -66,6 +67,27 @@ class Auth_Service {
       return true;
     } else {
       print('Login incorrecto');
+      throw response.body;
+      return false;
+      // throw Exception('Error al consultar el usuario');
+    }
+  }
+
+  Future<bool> signUp(SignUp signUpForm) async {
+    var response = await http.post(Uri.parse(_url + 'login/create'),
+        headers: headers,
+        body: jsonEncode(<String, String>{
+          'users': signUpForm.users,
+          'pass': signUpForm.pass,
+          'rol': "admin",
+          'direccionEmpresa': signUpForm.direccionEmpresa,
+          'nombreEmpresa': signUpForm.nombreEmpresa,
+          'rutEmpresa': signUpForm.rutEmpresa,
+        }));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print('SignUp incorrecto');
       throw response.body;
       return false;
       // throw Exception('Error al consultar el usuario');
