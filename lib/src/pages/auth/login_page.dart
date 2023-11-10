@@ -148,6 +148,7 @@ class _LogInPagePageState extends State<LogInPage> {
                     horizontal: 80.0, vertical: 20.0),
                 child: const Text('Iniciar Sesión')));
       },
+      stream: null,
     );
   }
 
