@@ -116,6 +116,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "firebase_core",
+      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/firebase_core-2.22.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_core_platform_interface",
+      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/firebase_core_platform_interface-5.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_core_web",
+      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/firebase_core_web-2.8.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/diegomartinez/Development/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -321,9 +339,9 @@
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.2",
+      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.6",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.19"
     },
     {
       "name": "process",
@@ -500,7 +518,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2023-11-10T02:07:59.755336Z",
+  "generated": "2023-11-13T01:13:53.898395Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }
