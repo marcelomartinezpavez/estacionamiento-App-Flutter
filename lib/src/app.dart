@@ -11,14 +11,12 @@ class MyApp extends StatefulWidget {
 }
 
 Widget somethingWentWrong(context) {
-  final GlobalKey<_AppState> somethingWentWrongKey = new GlobalKey<_AppState>();
+  final GlobalKey<_AppState> somethingWentWrongKey = GlobalKey<_AppState>();
 
   return MaterialApp(
     key: somethingWentWrongKey,
     debugShowCheckedModeBanner: false,
-    builder: (context, child) => Container(
-      child: Center(child: Text('Algo salió mal')),
-    ),
+    builder: (context, child) => const Center(child: Text('Algo salió mal')),
     theme: ThemeData(primaryColor: Colors.red),
   );
 }
@@ -41,7 +39,7 @@ Widget loading(context) {
 }
 
 class _AppState extends State<MyApp> {
-  Auth_Service _auth = new Auth_Service();
+  final Auth_Service _auth = Auth_Service();
 
   // Set default `_initialized` and `_error` state to false
   bool _initialized = false;

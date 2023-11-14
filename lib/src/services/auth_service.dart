@@ -8,12 +8,12 @@ import '../model/signup_model.dart';
 import '../routes/routes.dart';
 
 class Auth_Service {
-  final _url = 'http://localhost:8080/';
+  final _url = 'http://45.236.128.8:8080/';
   final headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  final LocalStorage storage = new LocalStorage('authCredentials');
+  final LocalStorage storage = LocalStorage('authCredentials');
 
   // Aquí voy a intentar iniciar sesión con los últimos datos ingresados
   Future<bool> loginFromLocalStorage(context) async {

@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 class Api_Service {
   String _disponibles = '';
 
-  var _url = 'http://localhost:8080/';
-  Auth_Service _auth = new Auth_Service();
+  final _url = 'http://45.236.128.8:8080/';
+  final Auth_Service _auth = new Auth_Service();
   var _estacionamientoId = '';
 
   Future<String> userHasConfig() async {
