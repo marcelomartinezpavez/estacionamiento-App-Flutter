@@ -51,10 +51,6 @@ class Auth_Service {
   }
 
   Future<bool> logIn(LogIn logInForm) async {
-    await storage.ready.then((value) async {
-      await storage.setItem('username', logInForm.username);
-      await storage.setItem('pass', logInForm.password);
-    });
     var response = await http.post(Uri.parse(_url + 'login/'),
         headers: headers,
         body: jsonEncode(<String, String>{
@@ -63,6 +59,10 @@ class Auth_Service {
         }));
     if (response.statusCode == 200) {
       print('Login correcto, se guardará -> ' + response.body);
+      await storage.ready.then((value) async {
+        await storage.setItem('username', logInForm.username);
+        await storage.setItem('pass', logInForm.password);
+      });
       await storage.setItem('userEstacionamiento', response.body);
       return true;
     } else {

@@ -13,7 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8283755-294c-4195-93eb-9ca84bad752e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/firebase-hosting-merge.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/firebase-hosting-merge.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/services/auth_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/services/auth_service.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +121,7 @@
       <workItem from="1656807596557" duration="2002000" />
       <workItem from="1699576558713" duration="5245000" />
       <workItem from="1699837811594" duration="1365000" />
-      <workItem from="1699920018000" duration="719000" />
+      <workItem from="1699920018000" duration="1398000" />
     </task>
     <task id="LOCAL-00001" summary="se modifica valores para datos de estacionamiento">
       <created>1653542168859</created>
