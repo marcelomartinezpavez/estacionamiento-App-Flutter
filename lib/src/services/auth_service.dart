@@ -8,7 +8,7 @@ import '../model/signup_model.dart';
 import '../routes/routes.dart';
 
 class Auth_Service {
-  final _url = 'http://45.236.128.8:8080/';
+  final _url = 'http://localhost:8080/';
   final headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
   };
