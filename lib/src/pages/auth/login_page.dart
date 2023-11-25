@@ -13,7 +13,7 @@ class LogInPage extends StatefulWidget {
 class _LogInPagePageState extends State<LogInPage> {
   final GlobalKey<FormState> logInKey = new GlobalKey<FormState>();
 
-  LogIn logIn = LogIn(username: 'admin', password: '123456');
+  LogIn logIn = LogIn(username: 'prueba2', password: 'q1w2e3r4');
 
   @override
   Widget build(BuildContext context) {

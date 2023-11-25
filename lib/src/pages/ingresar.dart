@@ -11,6 +11,7 @@ class Ingresar extends StatefulWidget {
 
 class _IngresarState extends State<Ingresar> {
   final GlobalKey<FormState> ingresarFormKey = GlobalKey<FormState>();
+  final myController = TextEditingController();
 
   String _patente = '';
   Api_Service api = Api_Service();
@@ -41,9 +42,12 @@ class _IngresarState extends State<Ingresar> {
                 key: ingresarFormKey,
                 autovalidateMode: AutovalidateMode.always,
                 child: TextFormField(
+                  controller: myController,
                   onChanged: (text) {
                     setState(() {
-                      _patente = text;
+                      _patente = text.toUpperCase();
+                      myController.value = myController.value
+                          .copyWith(text: _patente.toUpperCase());
                     });
                   },
                   validator: (value) {

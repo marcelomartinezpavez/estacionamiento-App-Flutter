@@ -10,11 +10,12 @@ class SalirPage extends StatefulWidget {
 
 class Salir extends State<SalirPage> {
   final GlobalKey<FormState> salirFormKey = GlobalKey<FormState>();
+  final myController = TextEditingController();
 
   static const String routeName = '/salir';
-  String _data = '';
+  String? _data;
   String _patente = '';
-  int valorTotal = 0;
+  int? valorTotal;
 
   Api_Service api = Api_Service();
 
@@ -43,9 +44,13 @@ class Salir extends State<SalirPage> {
                 key: salirFormKey,
                 autovalidateMode: AutovalidateMode.always,
                 child: TextFormField(
+                  textCapitalization: TextCapitalization.characters,
+                  controller: myController,
                   onChanged: (text) {
                     setState(() {
-                      _patente = text;
+                      _patente = text.toUpperCase();
+                      myController.value = myController.value
+                          .copyWith(text: _patente.toUpperCase());
                     });
                   },
                   validator: (value) {
@@ -59,12 +64,17 @@ class Salir extends State<SalirPage> {
                     hintText: 'Patente',
                   ),
                 )),
-            _data != ''
+            _data != null
                 ? Text(
-                    _data,
+                    _data!,
                     style: Theme.of(context).textTheme.headline4,
                   )
-                : Container(),
+                : valorTotal != null
+                    ? Text('\$ ' +
+                        valorTotal!.toString().replaceAllMapped(
+                            RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                            (Match m) => '${m[1]},'))
+                    : const Text('Busca una patente para ver el monto'),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(
@@ -72,11 +82,26 @@ class Salir extends State<SalirPage> {
               ),
               onPressed: _patente.length >= 5
                   ? () async {
+                      print('patente: ' + _patente);
                       var response = await api.toPayVehicle(_patente);
 
-                      setState(() {
-                        _data = response;
-                      });
+                      print('responseeeeee: ' + response);
+
+                      // intentar parsear response a numero, si no se puede que siga la ejecucion
+                      try {
+                        valorTotal = int.parse(response);
+                        setState(() {
+                          _data = null;
+                          valorTotal = int.parse(response);
+                        });
+                      } catch (e) {
+                        setState(() {
+                          valorTotal = null;
+
+                          _data = response;
+                        });
+                      }
+
                       await api.userHasConfig();
                     }
                   : null,

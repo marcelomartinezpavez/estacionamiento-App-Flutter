@@ -85,10 +85,22 @@ class _HomeLayoutState extends State<HomeLayout> {
 
                                           child: const Icon(Icons.info_outline,
                                               size: 30, color: Colors.black)),
-                                      Text(
-                                        'Valor por minuto: \$$_valorMinuto',
-                                        style: const TextStyle(fontSize: 15),
-                                      )
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            // parsear el valor a CLP, con puntuacion y signo
+
+                                            'El valor por minuto es: \$',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          Text(_valorMinuto!
+                                              .toString()
+                                              .replaceAllMapped(
+                                                  RegExp(
+                                                      r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                                  (Match m) => '${m[1]},'))
+                                        ],
+                                      ),
                                     ],
                                   ),
 
