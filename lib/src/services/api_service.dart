@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class Api_Service {
   String _disponibles = '';
 
-  final _url = 'http://localhost:8080/';
+  final _url = 'http://45.236.128.8:8080/';
   final Auth_Service _auth = new Auth_Service();
   var _estacionamientoId = '';
 
@@ -48,7 +48,7 @@ class Api_Service {
 
     print("_estacionamientoId: " + _estacionamientoId);
     final response = await http.post(
-      Uri.parse('http://localhost:8080/estacionamiento/insert/pago'),
+      Uri.parse('http://45.236.128.8:8080/estacionamiento/insert/pago'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -77,7 +77,7 @@ class Api_Service {
     print('_estacionamientoId ==>: ' + _estacionamientoId);
 
     final response = await http.post(
-      Uri.parse('http://localhost:8080/estacionamiento/insert/estacionado'),
+      Uri.parse('http://45.236.128.8:8080/estacionamiento/insert/estacionado'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -99,7 +99,7 @@ class Api_Service {
     print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
 
     final response = await http.get(
-      Uri.parse('http://localhost:8080/estacionado/idEstacionamiento/' +
+      Uri.parse('http://45.236.128.8:8080/estacionado/idEstacionamiento/' +
           _estacionamientoId),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
