@@ -2,7 +2,9 @@ import 'package:estacionamiento/src/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class SalirPage extends StatefulWidget {
-  const SalirPage({Key? key}) : super(key: key);
+  SalirPage({Key? key, this.patente}) : super(key: key);
+
+  String? patente;
 
   @override
   State<SalirPage> createState() => Salir();
@@ -18,6 +20,16 @@ class Salir extends State<SalirPage> {
   int? valorTotal;
 
   Api_Service api = Api_Service();
+
+  @override
+  void initState() {
+    setState(() {
+      _patente = widget.patente ?? '';
+      myController.value =
+          myController.value.copyWith(text: _patente.toUpperCase());
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

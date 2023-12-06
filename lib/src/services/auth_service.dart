@@ -16,7 +16,7 @@ class Auth_Service {
   final LocalStorage storage = LocalStorage('authCredentials');
 
   // Aquí voy a intentar iniciar sesión con los últimos datos ingresados
-  Future<bool> loginFromLocalStorage(context) async {
+  /* Future<bool> loginFromLocalStorage(context) async {
     return await storage.ready.then((value) async {
       print('LocalStorage ready');
       var username = storage.getItem('username');
@@ -42,7 +42,7 @@ class Auth_Service {
         }
       }
     });
-  }
+  }*/
 
   dynamic getActualUser() {
     var user = storage.getItem('userEstacionamiento');
@@ -59,10 +59,10 @@ class Auth_Service {
         }));
     if (response.statusCode == 200) {
       print('Login correcto, se guardará -> ' + response.body);
-      await storage.ready.then((value) async {
-        await storage.setItem('username', logInForm.username);
-        await storage.setItem('pass', logInForm.password);
-      });
+      // await storage.ready.then((value) async {
+      //   await storage.setItem('username', logInForm.username);
+      //   await storage.setItem('pass', logInForm.password);
+      // });
       await storage.setItem('userEstacionamiento', response.body);
       return true;
     } else {

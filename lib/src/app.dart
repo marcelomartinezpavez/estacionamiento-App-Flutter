@@ -21,6 +21,7 @@ Widget somethingWentWrong(context) {
   );
 }
 
+// TODO: Sacar lógica del login con localStorage
 Widget loading(context) {
   final GlobalKey<_AppState> loadingKey = GlobalKey<_AppState>();
 
@@ -49,7 +50,7 @@ class _AppState extends State<MyApp> {
   // Define an async function to initialize FlutterFire
   void initializeAPP() async {
     try {
-      _autenticated = await _auth.loginFromLocalStorage(context);
+      _autenticated = false;
 
       setState(() {
         _initialized = true;
@@ -78,7 +79,7 @@ class _AppState extends State<MyApp> {
     }
     // Show a loader until FlutterFire is initialized
     if (!_initialized) {
-      print('Loading...');
+      print('Cargando...');
       return loading(context);
     }
 

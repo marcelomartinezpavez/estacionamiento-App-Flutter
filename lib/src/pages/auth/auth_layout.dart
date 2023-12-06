@@ -1,5 +1,4 @@
 import 'package:estacionamiento/src/pages/auth/login_page.dart';
-import 'package:estacionamiento/src/pages/auth/signup_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthLayout extends StatefulWidget {
@@ -16,28 +15,30 @@ class _AuthLayoutState extends State<AuthLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Estacionamiento")),
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            icon: Icon(Icons.explore),
-            label: 'Iniciar sesión',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.commute),
-            label: 'Registrarse',
-          ),
-        ],
-      ),
-      body: <Widget>[
-        Center(child: LogInPage()),
-        Center(child: SignUpPage())
-      ][currentPageIndex],
+      body: const Center(child: LogInPage()),
+
+      // bottomNavigationBar: NavigationBar(
+      //   onDestinationSelected: (int index) {
+      //     setState(() {
+      //       currentPageIndex = index;
+      //     });
+      //   },
+      //   selectedIndex: currentPageIndex,
+      //   destinations: const <Widget>[
+      //     NavigationDestination(
+      //       icon: Icon(Icons.explore),
+      //       label: 'Iniciar sesión',
+      //     ),
+      //     NavigationDestination(
+      //       icon: Icon(Icons.commute),
+      //       label: 'Registrarse',
+      //     ),
+      //   ],
+      // ),
+      // body: <Widget>[
+      //   const Center(child: LogInPage()),
+      //   Center(child: SignUpPage())
+      // ][currentPageIndex],
     );
   }
 }

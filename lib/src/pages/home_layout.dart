@@ -88,8 +88,6 @@ class _HomeLayoutState extends State<HomeLayout> {
                                       Row(
                                         children: [
                                           const Text(
-                                            // parsear el valor a CLP, con puntuacion y signo
-
                                             'El valor por minuto es: \$',
                                             style: TextStyle(fontSize: 15),
                                           ),
@@ -283,8 +281,6 @@ class _HomeLayoutState extends State<HomeLayout> {
                       child: Card(
                         color: Colors.yellowAccent.shade100,
                         child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          //crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
