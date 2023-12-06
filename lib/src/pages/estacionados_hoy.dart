@@ -34,16 +34,9 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const Text('Vehículos Estacionados hoy',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-          Container(
-              child: _data != null
-                  ? _buildDetail()
-                  : const Center(child: CircularProgressIndicator.adaptive())),
-        ],
-      ),
+      child: _data != null
+          ? _buildDetail()
+          : const Center(child: CircularProgressIndicator.adaptive()),
     );
   }
 

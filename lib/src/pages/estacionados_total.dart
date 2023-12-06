@@ -34,16 +34,11 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const Text('Vehículos Estacionados en total',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-          Container(
-              child: _data != null
-                  ? _buildDetail()
-                  : const Center(child: CircularProgressIndicator.adaptive())),
-        ],
-      ),
+      child: _data != null
+          ? _buildDetail()
+          : const Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
     );
   }
 
