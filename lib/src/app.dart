@@ -21,7 +21,6 @@ Widget somethingWentWrong(context) {
   );
 }
 
-// TODO: Sacar lógica del login con localStorage
 Widget loading(context) {
   final GlobalKey<_AppState> loadingKey = GlobalKey<_AppState>();
 

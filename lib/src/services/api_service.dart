@@ -94,13 +94,35 @@ class Api_Service {
     }
   }
 
-  Future getEstacionado() async {
+  Future getEstacionadoHoy() async {
     await userHasConfig();
     print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
 
     final response = await http.get(
       Uri.parse('http://45.236.128.8:8080/estacionado/idEstacionamiento/' +
           _estacionamientoId),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      print('ESTACIONADO response.body');
+      print(response.body);
+      return jsonDecode(response.body);
+    } else {
+      return (response.body);
+    }
+  }
+
+  Future getEstacionadoTotal() async {
+    await userHasConfig();
+    print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
+
+    final response = await http.get(
+      Uri.parse('http://45.236.128.8:8080/estacionado/idEstacionamiento/' +
+          _estacionamientoId +
+          '/all'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
