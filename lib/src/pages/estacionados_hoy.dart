@@ -33,11 +33,28 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: _data != null
-          ? _buildDetail()
-          : const Center(child: CircularProgressIndicator.adaptive()),
-    );
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            _data != null
+                ? Card(
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          title: Text(
+                              'Total recaudado: \$ ${_data.map((e) => e['valorTotal']).reduce((value, element) => value + element)}',
+                              style: const TextStyle(fontSize: 20)),
+                          subtitle: Text('Total estacionados: ${_data.length}',
+                              style: const TextStyle(fontSize: 20)),
+                        )))
+                : Container(),
+            _data != null
+                ? Expanded(child: _buildDetail())
+                : const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+          ],
+        ));
   }
 
   Widget _buildDetail() {
