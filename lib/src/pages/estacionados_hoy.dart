@@ -61,8 +61,8 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                 child: Card(
                   child: ListTile(
                     title: Text('${_data[index]['patente']}'),
-                    subtitle: _data[index]['valorTotal'] != 0
-                        ? Text('${_data[index]['valorTotal']}')
+                    subtitle: _data[index]['estado'].toString() == '1'
+                        ? Text('\$ ${_data[index]['valorTotal']}')
                         : const Text('...'),
                     trailing: '${_data[index]['estado']}' == '1'
                         ? Text('Pagado',
@@ -72,8 +72,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                         : Text('Estacionado',
                             style: TextStyle(color: Colors.red[300])),
                     leading: Text(DateFormat('dd/MM/yyyy HH:mm').format(
-                        DateTime.parse('${_data[index]['fechaIngreso']}')
-                            .subtract(const Duration(hours: 3)))),
+                        DateTime.parse('${_data[index]['fechaIngreso']}'))),
                   ),
                 ),
               );
