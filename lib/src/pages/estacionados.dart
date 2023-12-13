@@ -27,7 +27,8 @@ class estacionados extends State<EstacionadosPage>
 
   @override
   void initState() {
-    _tabController = TabController(vsync: this, length: myTabs.length);
+    _tabController =
+        TabController(vsync: this, length: myTabs.length, initialIndex: 0);
     super.initState();
   }
 

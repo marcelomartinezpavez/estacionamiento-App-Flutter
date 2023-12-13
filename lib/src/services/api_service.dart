@@ -109,6 +109,8 @@ class Api_Service {
     if (response.statusCode == 200) {
       print('ESTACIONADO response.body');
       print(response.body);
+      print('jsondecore');
+      print(jsonDecode(response.body));
       return jsonDecode(response.body);
     } else {
       return (response.body);

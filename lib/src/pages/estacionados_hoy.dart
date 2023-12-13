@@ -13,14 +13,18 @@ class EstacionadosHoy extends StatefulWidget {
 
 class _EstacionadosHoyState extends State<EstacionadosHoy> {
   Api_Service api = Api_Service();
-  var _data;
+  List<dynamic> _data = [];
+  bool loading = true;
 
   void getData() async {
     _data = await api.getEstacionadoHoy();
-    _data = _data.reversed.toList();
+    if (_data.isNotEmpty) _data = _data.reversed.toList();
 
+    if (_data.isEmpty) _data = [];
     setState(() {
+      print('dataaaaaa $_data');
       _data = _data;
+      loading = false;
     });
   }
 
@@ -36,7 +40,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            _data != null
+            _data.isNotEmpty
                 ? Card(
                     child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -48,7 +52,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                               style: const TextStyle(fontSize: 20)),
                         )))
                 : Container(),
-            _data != null
+            !loading
                 ? Expanded(child: _buildDetail())
                 : const Center(
                     child: CircularProgressIndicator.adaptive(),
@@ -58,7 +62,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
   }
 
   Widget _buildDetail() {
-    return _data.length == 0
+    return _data.isEmpty
         ? const Text('No se han encontrado datos')
         : ListView.builder(
             itemCount: _data.length,
@@ -89,7 +93,8 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                         : Text('Estacionado',
                             style: TextStyle(color: Colors.red[300])),
                     leading: Text(DateFormat('dd/MM/yyyy HH:mm').format(
-                        DateTime.parse('${_data[index]['fechaIngreso']}'))),
+                        DateTime.parse('${_data[index]['fechaIngreso']}')
+                            .subtract(const Duration(hours: 3)))),
                   ),
                 ),
               );
