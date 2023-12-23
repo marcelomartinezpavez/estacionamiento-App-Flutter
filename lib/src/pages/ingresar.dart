@@ -56,6 +56,13 @@ class _IngresarState extends State<Ingresar> {
                     if (value == null || value.length <= 4) {
                       return 'Por favor ingrese una patente';
                     }
+                    // validar que no permita Ñ ni caracteres especiales, solo letras y números
+                    if (value.contains(RegExp(r'[ñÑ]'))) {
+                      return 'La patente no puede contener Ñ';
+                    }
+                    if (value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                      return 'La patente no puede contener caracteres especiales';
+                    }
                     return null;
                   },
                   decoration: const InputDecoration(
