@@ -69,11 +69,8 @@ class Salir extends State<SalirPage> {
                     if (value == null || value.length <= 4) {
                       return 'Por favor ingrese una patente';
                     }
-                    // validar que no permita Ñ ni caracteres especiales, solo letras y números
-                    if (value.contains(RegExp(r'[ñÑ]'))) {
-                      return 'La patente no puede contener Ñ';
-                    }
-                    if (value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                    RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
+                    if (!r.hasMatch(value)) {
                       return 'La patente no puede contener caracteres especiales';
                     }
                     return null;

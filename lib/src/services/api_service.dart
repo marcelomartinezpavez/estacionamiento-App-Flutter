@@ -117,6 +117,24 @@ class Api_Service {
     }
   }
 
+  Future deleteEstacionado(String id) async {
+    await userHasConfig();
+    print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
+
+    final response = await http.post(
+      Uri.parse(_url + 'insert/sin/pago/' + id),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return 'Vehiculo excluido';
+    } else {
+      return (response.body);
+    }
+  }
+
   Future getEstacionadoTotal() async {
     await userHasConfig();
     print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);

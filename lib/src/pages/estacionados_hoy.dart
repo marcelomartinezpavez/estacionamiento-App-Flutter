@@ -67,35 +67,130 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
         : ListView.builder(
             itemCount: _data.length,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => _data[index]['estado'].toString() == '1'
-                    ? null
-                    : Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              SalirPage(patente: _data[index]['patente']),
-                          fullscreenDialog: true,
-                        )).then((value) => {
-                          getData(),
-                        }),
-                child: Card(
-                  child: ListTile(
-                    title: Text('${_data[index]['patente']}'),
-                    subtitle: _data[index]['estado'].toString() == '1'
-                        ? Text('\$ ${_data[index]['valorTotal']}')
-                        : const Text('...'),
-                    trailing: '${_data[index]['estado']}' == '1'
-                        ? Text('Pagado',
-                            style: TextStyle(
-                              color: Colors.green[300],
-                            ))
-                        : Text('Estacionado',
-                            style: TextStyle(color: Colors.red[300])),
-                    leading: Text(DateFormat('dd/MM/yyyy HH:mm').format(
-                        DateTime.parse('${_data[index]['fechaIngreso']}')
-                            .subtract(const Duration(hours: 3)))),
-                  ),
+              return Card(
+                child: ListTile(
+                  // Mostrar una alerta al hacer longpress
+                  onLongPress: () {
+                    showAdaptiveDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Opciones'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Patente: ${_data[index]['patente']}'),
+                                    IconButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        icon: const Icon(Icons.close)),
+                                  ],
+                                ),
+                                const Text('Fecha de ingreso: '),
+                                Text(DateFormat('dd/MM/yyyy HH:mm').format(
+                                    DateTime.parse(
+                                            '${_data[index]['fechaIngreso']}')
+                                        .subtract(const Duration(hours: 3)))),
+                                const Text('Fecha de salida: '),
+                                Text(DateFormat('dd/MM/yyyy HH:mm').format(
+                                    DateTime.parse(
+                                            '${_data[index]['fechaSalida']}')
+                                        .subtract(const Duration(hours: 3)))),
+                                const Text('Valor total: '),
+                                Text('\$ ${_data[index]['valorTotal']}'),
+                              ],
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => {
+                                  Navigator.of(context).pop(false),
+                                  // Mostrar una alerta para confirmar la acción de eliminar
+                                  showAdaptiveDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text('Eliminar'),
+                                          content: Text(
+                                              '¿Desea eliminar el registro de ${_data[index]['patente']}?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => {
+                                                Navigator.of(context)
+                                                    .pop(false),
+                                              },
+                                              child: const Text('Cancelar'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () => {
+                                                api.deleteEstacionado(
+                                                    _data[index]['id']),
+                                                getData(),
+                                                Navigator.of(context).pop(true),
+                                              },
+                                              child: const Text('Eliminar'),
+                                            ),
+                                          ],
+                                        );
+                                      })
+                                },
+                                child: const Text('Eliminar'),
+                              ),
+                              _data[index]['estado'].toString() == '1'
+                                  ? Container()
+                                  : TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(true),
+                                      child: const Text('Ir a pagar'),
+                                    ),
+                            ],
+                          );
+                        }).then((value) => {
+                          if (value && ['estado'].toString() == '1')
+                            {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        SalirPage(
+                                            patente: _data[index]['patente']),
+                                    fullscreenDialog: true,
+                                  )).then((value) => {
+                                    getData(),
+                                  })
+                            }
+                        });
+                  },
+
+                  onTap: () => _data[index]['estado'].toString() == '1'
+                      ? null
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                SalirPage(patente: _data[index]['patente']),
+                            fullscreenDialog: true,
+                          )).then((value) => {
+                            getData(),
+                          }),
+                  title: Text('${_data[index]['patente']}'),
+                  subtitle: _data[index]['estado'].toString() == '1'
+                      ? Text('\$ ${_data[index]['valorTotal']}')
+                      : const Text('...'),
+                  trailing: '${_data[index]['estado']}' == '1'
+                      ? Text('Pagado',
+                          style: TextStyle(
+                            color: Colors.green[300],
+                          ))
+                      : Text('Estacionado',
+                          style: TextStyle(color: Colors.red[300])),
+                  leading: Text(DateFormat('dd/MM/yyyy HH:mm').format(
+                      DateTime.parse('${_data[index]['fechaIngreso']}')
+                          .subtract(const Duration(hours: 3)))),
                 ),
               );
             },
