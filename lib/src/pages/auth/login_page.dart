@@ -120,7 +120,7 @@ class _LogInPagePageState extends State<LogInPage> {
               labelText: 'Contraseña'),
           obscureText: true,
           validator: (value) {
-            if (value!.length <= 5) {
+            if (value!.length <= 4) {
               return 'La contraseña debe ser mas larga';
             } else {
               return null;

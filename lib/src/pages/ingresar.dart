@@ -73,24 +73,26 @@ class _IngresarState extends State<Ingresar> {
                 minimumSize: const Size.fromHeight(
                     40), // fromHeight use double.infinity as width and 40 is the height
               ),
-              onPressed: _patente.length >= 5 && !_loading
-                  ? () async {
-                      setState(() {
-                        _loading = true;
-                      });
-                      var response = await api.insertVehicle(_patente);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(response),
-                        action: SnackBarAction(
-                          label: 'Ok',
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ));
-                      setState(() {
-                        _loading = false;
-                      });
-                    }
-                  : null,
+              onPressed:
+                  ingresarFormKey.currentState?.validate() == true && !_loading
+                      ? () async {
+                          setState(() {
+                            _loading = true;
+                          });
+
+                          var response = await api.insertVehicle(_patente);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(response),
+                            action: SnackBarAction(
+                              label: 'Ok',
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ));
+                          setState(() {
+                            _loading = false;
+                          });
+                        }
+                      : null,
               child: const Text('Ingresar'),
             ),
           ],
