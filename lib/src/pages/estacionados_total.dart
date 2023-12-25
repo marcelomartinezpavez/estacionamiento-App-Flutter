@@ -136,8 +136,7 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                       api
                                                           .deleteEstacionado(
                                                               _data[index]
-                                                                  .patente
-                                                                  .toString())
+                                                                  .patente)
                                                           .then((value) => {
                                                                 Navigator.of(
                                                                         context)

@@ -30,7 +30,7 @@ class Api_Service {
     return response.body;
   }
 
-  Future<String> toPayVehicle(String patente) async {
+  Future<String> toPayVehicle(String patente, TipoPago tipoPago) async {
     await this.userHasConfig();
 
     print("_estacionamientoId: " + _estacionamientoId);
@@ -41,6 +41,7 @@ class Api_Service {
       },
       body: jsonEncode(<String, String>{
         'patente': patente,
+        'tipoPago': tipoPago.index.toString(),
         'estacionamiento_id': _estacionamientoId
       }),
     );

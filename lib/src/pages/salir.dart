@@ -1,3 +1,4 @@
+import 'package:estacionamiento/src/model/parked.dart';
 import 'package:estacionamiento/src/services/api_service.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class Salir extends State<SalirPage> {
   static const String routeName = '/salir';
   String? _data;
   String _patente = '';
+  TipoPago tipoPago = TipoPago.efectivo;
   int? valorTotal;
 
   Api_Service api = Api_Service();
@@ -55,30 +57,59 @@ class Salir extends State<SalirPage> {
             Form(
                 key: salirFormKey,
                 autovalidateMode: AutovalidateMode.always,
-                child: TextFormField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: myController,
-                  onChanged: (text) {
-                    setState(() {
-                      _patente = text.toUpperCase();
-                      myController.value = myController.value
-                          .copyWith(text: _patente.toUpperCase());
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null || value.length <= 4) {
-                      return 'Por favor ingrese una patente';
-                    }
-                    RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
-                    if (!r.hasMatch(value)) {
-                      return 'La patente no puede contener caracteres especiales';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Patente',
-                  ),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      textCapitalization: TextCapitalization.characters,
+                      controller: myController,
+                      onChanged: (text) {
+                        setState(() {
+                          _patente = text.toUpperCase();
+                          myController.value = myController.value
+                              .copyWith(text: _patente.toUpperCase());
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.length <= 4) {
+                          return 'Por favor ingrese una patente';
+                        }
+                        RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
+                        if (!r.hasMatch(value)) {
+                          return 'La patente no puede contener caracteres especiales';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Patente',
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    DropdownButton<String>(
+                      value: tipoPago.name,
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          tipoPago = TipoPago.values.firstWhere(
+                              (element) => element.name == newValue);
+                        });
+                      },
+                      items: <String>['efectivo', 'credito', 'debito']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: buildText(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
                 )),
             _data != null
                 ? Text(
@@ -99,7 +130,9 @@ class Salir extends State<SalirPage> {
               onPressed: _patente.length >= 5
                   ? () async {
                       print('patente: ' + _patente);
-                      var response = await api.toPayVehicle(_patente);
+                      print('tipoPago: ' + tipoPago.index.toString());
+                      print('tipoPago: ' + tipoPago.name);
+                      var response = await api.toPayVehicle(_patente, tipoPago);
 
                       print('responseeeeee: ' + response);
 
@@ -127,5 +160,18 @@ class Salir extends State<SalirPage> {
         ),
       ),
     );
+  }
+
+  Widget buildText(String value) {
+    switch (value) {
+      case 'efectivo':
+        return const Text('Efectivo');
+      case 'credito':
+        return const Text('Crédito');
+      case 'debito':
+        return const Text('Débito');
+      default:
+        return const Text('Efectivo');
+    }
   }
 }

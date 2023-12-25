@@ -93,14 +93,20 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                 ),
                                 const Text('Fecha de ingreso: '),
                                 Text(_data[index].fechaIngresoFormatted()),
-                                _data[index].fechaSalida != null
+                                _data[index].estado == Estado.pagado
                                     ? const Text('Fecha de salida: ')
                                     : Container(),
-                                _data[index].fechaSalida != null
+                                _data[index].estado == Estado.pagado
                                     ? Text(_data[index].fechaSalidaFormatted())
                                     : Container(),
-                                const Text('Valor total: '),
-                                Text('\$ ${_data[index].valorTotal}'),
+                                _data[index].estado == Estado.pagado
+                                    ? Text(
+                                        'Valor total: \$ ${_data[index].valorTotal}')
+                                    : Container(),
+                                _data[index].estado == Estado.pagado
+                                    ? Text(
+                                        'Tipo pago: ${_data[index].tipoPago.name}')
+                                    : Container(),
                               ],
                             ),
                             actions: <Widget>[
@@ -130,8 +136,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                                       api
                                                           .deleteEstacionado(
                                                               _data[index]
-                                                                  .patente
-                                                                  .toString())
+                                                                  .patente)
                                                           .then((value) => {
                                                                 Navigator.of(
                                                                         context)
