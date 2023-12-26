@@ -8,8 +8,8 @@ import '../model/parked.dart';
 class Api_Service {
   String _disponibles = '';
 
-  // final _url = 'http://45.236.128.8:8080/';
-  final _url = 'http://localhost:8080/';
+  final _url = 'http://45.236.128.8:8080/';
+  // final _url = 'http://localhost:8080/';
   final Auth_Service _auth = Auth_Service();
   var _estacionamientoId = '';
 

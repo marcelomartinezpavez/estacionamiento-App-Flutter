@@ -191,7 +191,8 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                       : null,
                   title: Text(_data[index].patente),
                   subtitle: _data[index].estado == Estado.pagado
-                      ? Text('\$ ${_data[index].valorTotal}')
+                      ? Text(
+                          '\$ ${_data[index].valorTotal} con ${_data[index].getTipoPago().toLowerCase()}')
                       : const Text('...'),
                   trailing: _data[index].buildEstado(),
                   leading: Text(_data[index].fechaIngresoFormatted()),

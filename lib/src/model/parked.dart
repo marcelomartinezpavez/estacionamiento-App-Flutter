@@ -73,6 +73,19 @@ class Parked {
         .format(fechaSalida!.subtract(const Duration(hours: 3)));
   }
 
+  String getTipoPago() {
+    switch (tipoPago) {
+      case TipoPago.efectivo:
+        return 'Efectivo';
+      case TipoPago.credito:
+        return 'Crédito';
+      case TipoPago.debito:
+        return 'Débito';
+      default:
+        return '...';
+    }
+  }
+
   Widget buildEstado() {
     switch (estado) {
       case Estado.pagado:
