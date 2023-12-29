@@ -275,7 +275,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                           context,
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) =>
-                                EstacionadosPage(),
+                                const EstacionadosPage(),
                             fullscreenDialog: true,
                           )).then((value) => getConfig()),
                       child: Card(
@@ -287,7 +287,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                    margin: EdgeInsets.all(10),
+                                    margin: const EdgeInsets.all(10),
                                     width: 80,
                                     height: 80,
                                     //alignment: Alignment.center,

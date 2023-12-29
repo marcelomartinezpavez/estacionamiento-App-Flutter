@@ -15,6 +15,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
   Api_Service api = Api_Service();
   List<Parked> _data = [];
   bool loading = true;
+  bool showReport = false;
 
   void getData() async {
     _data = await api.getEstacionadoHoy();
@@ -41,16 +42,189 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
         child: Column(
           children: [
             _data.isNotEmpty
-                ? Card(
-                    child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          title: Text(
-                              'Total recaudado: \$ ${_data.map((e) => e.valorTotal).reduce((value, element) => value + element)}',
-                              style: const TextStyle(fontSize: 20)),
-                          subtitle: Text('Total estacionados: ${_data.length}',
-                              style: const TextStyle(fontSize: 20)),
-                        )))
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ExpansionPanelList(
+                        expansionCallback: (int index, bool isExpanded) {
+                          setState(() {
+                            showReport = isExpanded;
+                          });
+                        },
+                        children: [
+                          ExpansionPanel(
+                              headerBuilder:
+                                  (BuildContext context, bool isExpanded) {
+                                return const ListTile(
+                                  title: Text('Reportes'),
+                                );
+                              },
+                              body: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Card(
+                                      color: Colors.green.shade50,
+                                      // Usar el color pastel que prefieras.
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Row(
+                                              children: [
+                                                Icon(Icons.analytics_outlined),
+                                                Text('Total recaudado:',
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold))
+                                              ],
+                                            ),
+                                            Text(
+                                                'Suma total: \$' +
+                                                    _data
+                                                        .map(
+                                                            (e) => e.valorTotal)
+                                                        .reduce(
+                                                            (value, element) =>
+                                                                value + element)
+                                                        .toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 15)),
+                                            Text(
+                                                'Conteo: ' +
+                                                    _data.length.toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 10)),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Card(
+                                            color: Colors.blue.shade50,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Row(
+                                                      children: [
+                                                        Icon(Icons
+                                                            .credit_card_outlined),
+                                                        Text('Total tarjeta:',
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ],
+                                                    ),
+                                                    Text(
+                                                        'Suma total: \$' +
+                                                            _data
+                                                                .map((e) => e
+                                                                            .tipoPago !=
+                                                                        TipoPago
+                                                                            .efectivo
+                                                                    ? e
+                                                                        .valorTotal
+                                                                    : 0)
+                                                                .reduce((value,
+                                                                        element) =>
+                                                                    value +
+                                                                    element)
+                                                                .toString(),
+                                                        style: const TextStyle(
+                                                            fontSize: 15)),
+                                                    Text(
+                                                        'Conteo: ' +
+                                                            _data
+                                                                .where((element) =>
+                                                                    element
+                                                                        .tipoPago !=
+                                                                    TipoPago
+                                                                        .efectivo)
+                                                                .length
+                                                                .toString(),
+                                                        style: const TextStyle(
+                                                            fontSize: 10)),
+                                                  ]),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Card(
+                                            color: Colors.yellow.shade50,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Row(
+                                                    children: [
+                                                      Icon(
+                                                          Icons.money_outlined),
+                                                      Text('Total efectivo:',
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                      'Suma total: \$' +
+                                                          _data
+                                                              .map((e) => e
+                                                                          .tipoPago ==
+                                                                      TipoPago
+                                                                          .efectivo
+                                                                  ? e.valorTotal
+                                                                  : 0)
+                                                              .reduce((value,
+                                                                      element) =>
+                                                                  value +
+                                                                  element)
+                                                              .toString(),
+                                                      style: const TextStyle(
+                                                          fontSize: 15)),
+                                                  Text(
+                                                      'Conteo: ' +
+                                                          _data
+                                                              .where((element) =>
+                                                                  element
+                                                                      .tipoPago ==
+                                                                  TipoPago
+                                                                      .efectivo)
+                                                              .length
+                                                              .toString(),
+                                                      style: const TextStyle(
+                                                          fontSize: 10)),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              isExpanded: showReport)
+                        ]),
+                  )
                 : Container(),
             !loading
                 ? Expanded(child: _buildDetail())
