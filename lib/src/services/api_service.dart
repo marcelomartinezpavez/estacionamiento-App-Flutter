@@ -30,7 +30,7 @@ class Api_Service {
     return response.body;
   }
 
-  Future<String> toPayVehicle(String patente, TipoPago tipoPago) async {
+  Future<Parked> toPayVehicle(String patente, TipoPago tipoPago) async {
     await this.userHasConfig();
 
     print("_estacionamientoId: " + _estacionamientoId);
@@ -46,10 +46,13 @@ class Api_Service {
       }),
     );
 
+    print('RRRRRR' + response.body);
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)['valorTotal'].toString();
+      print('si entra acá');
+      return Parked.fromJson(jsonDecode(response.body));
     } else {
-      return response.body;
+      print('errorrrrr' + response.body);
+      throw response.body;
     }
   }
 
@@ -75,12 +78,54 @@ class Api_Service {
     }
   }
 
+  Future<String?> updateVehicle(Parked parked) async {
+    await userHasConfig();
+    print('_estacionamientoId ==>: ' + _estacionamientoId);
+
+    final response = await http.put(
+      Uri.parse('${_url}estacionamiento/update/estacionado'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'id': parked.id.toString(),
+        'tipoPago': parked.tipoPago.index.toString(),
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return 'Actualizado';
+    } else {
+      return (response.body);
+    }
+  }
+
   Future<List<Parked>> getEstacionadoHoy() async {
     await userHasConfig();
     print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
 
     final response = await http.get(
       Uri.parse('${_url}estacionado/idEstacionamiento/' + _estacionamientoId),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return Parked.fromJsonList(jsonDecode(response.body));
+      // return jsonDecode(response.body);
+    } else {
+      return (jsonDecode(response.body));
+    }
+  }
+
+  Future<List<Parked>> getEstacionadoActualmente() async {
+    await userHasConfig();
+    print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
+
+    final response = await http.get(
+      Uri.parse('${_url}estacionado/sin/pago/idEstacionamiento/' +
+          _estacionamientoId),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

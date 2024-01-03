@@ -20,6 +20,8 @@ class Salir extends State<SalirPage> {
   String _patente = '';
   TipoPago tipoPago = TipoPago.efectivo;
   int? valorTotal;
+  late Parked parked;
+  late List<String> actuallyParked;
 
   Api_Service api = Api_Service();
 
@@ -30,7 +32,19 @@ class Salir extends State<SalirPage> {
       myController.value =
           myController.value.copyWith(text: _patente.toUpperCase());
     });
+    getActuallyParked();
     super.initState();
+  }
+
+  getActuallyParked() async {
+    print('ObtenerEstacionados');
+    await api.getEstacionadoActualmente().then((value) {
+      setState(() {
+        var patentesList = value.map((e) => e.patente).toList();
+        print('ObtenerEstacionados: ' + patentesList.toString());
+        actuallyParked = patentesList;
+      });
+    });
   }
 
   @override
@@ -59,68 +73,228 @@ class Salir extends State<SalirPage> {
                 autovalidateMode: AutovalidateMode.always,
                 child: Column(
                   children: [
-                    TextFormField(
-                      textCapitalization: TextCapitalization.characters,
-                      controller: myController,
-                      onChanged: (text) {
+                    // TextFormField(
+                    //   textCapitalization: TextCapitalization.characters,
+                    //   controller: myController,
+                    //   onChanged: (text) {
+                    //     setState(() {
+                    //       _patente = text.toUpperCase();
+                    //       myController.value = myController.value
+                    //           .copyWith(text: _patente.toUpperCase());
+                    //     });
+                    //   },
+                    //   validator: (value) {
+                    //     if (value == null || value.length <= 4) {
+                    //       return 'Por favor ingrese una patente';
+                    //     }
+                    //     RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
+                    //     if (!r.hasMatch(value)) {
+                    //       return 'La patente no puede contener caracteres especiales';
+                    //     }
+                    //     return null;
+                    //   },
+                    //   decoration: const InputDecoration(
+                    //     border: OutlineInputBorder(),
+                    //     hintText: 'Patente',
+                    //   ),
+                    // ),
+
+                    // RawAutocomplete<String>(
+                    //   optionsBuilder: (TextEditingValue textEditingValue) {
+                    //     if (textEditingValue.text == '') {
+                    //       return const Iterable<String>.empty();
+                    //     }
+                    //     return actuallyParked.where((String option) {
+                    //       return option
+                    //           .contains(textEditingValue.text.toUpperCase());
+                    //     });
+                    //   },
+                    //   focusNode: FocusNode(),
+                    //   textEditingController: myController,
+                    //   fieldViewBuilder: (BuildContext context,
+                    //       TextEditingController fieldTextEditingController,
+                    //       FocusNode fieldFocusNode,
+                    //       VoidCallback onFieldSubmitted) {
+                    //     return TextFormField(
+                    //       controller: fieldTextEditingController,
+                    //       textCapitalization: TextCapitalization.characters,
+                    //       focusNode: fieldFocusNode,
+                    //       onFieldSubmitted: (String value) {
+                    //         onFieldSubmitted();
+                    //       },
+                    //       decoration: const InputDecoration(
+                    //         border: OutlineInputBorder(),
+                    //         hintText: 'Patente',
+                    //       ),
+                    //       onChanged: (text) {
+                    //         setState(() {
+                    //           _patente = text.toUpperCase();
+                    //           fieldTextEditingController.value =
+                    //               fieldTextEditingController.value
+                    //                   .copyWith(text: _patente.toUpperCase());
+                    //         });
+                    //       },
+                    //       validator: (value) {
+                    //         if ((value == null || value.length <= 4) &&
+                    //             value != '') {
+                    //           return 'Por favor ingrese una patente valida';
+                    //         }
+                    //         RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
+                    //         if (!r.hasMatch(value!)) {
+                    //           return 'La patente no puede contener caracteres especiales';
+                    //         }
+                    //         return null;
+                    //       },
+                    //     );
+                    //   },
+                    //   optionsViewBuilder: (BuildContext context,
+                    //       AutocompleteOnSelected<String> onSelected,
+                    //       Iterable<String> options) {
+                    //     print('OPTIONS: ' + options.toString());
+                    //     return ListView.builder(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       itemCount: options.length,
+                    //       itemBuilder: (BuildContext context, int index) {
+                    //         final String option = options.elementAt(index);
+                    //         return GestureDetector(
+                    //           onTap: () {
+                    //             onSelected(option);
+                    //           },
+                    //           child: ListTile(
+                    //             title: Text(option),
+                    //           ),
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    //   onSelected: (String selection) {
+                    //     _patente = selection.toUpperCase();
+                    //     myController.value = myController.value
+                    //         .copyWith(text: _patente.toUpperCase());
+                    //   },
+                    // ),
+
+                    Autocomplete<String>(
+                      initialValue: TextEditingValue(text: _patente ?? ''),
+                      optionsBuilder: (TextEditingValue textEditingValue) {
+                        if (textEditingValue.text == '') {
+                          return const Iterable<String>.empty();
+                        }
+                        return actuallyParked.where((String option) {
+                          return option
+                              .contains(textEditingValue.text.toUpperCase());
+                        });
+                      },
+                      fieldViewBuilder: (BuildContext context,
+                          TextEditingController fieldTextEditingController,
+                          FocusNode fieldFocusNode,
+                          VoidCallback onFieldSubmitted) {
+                        return TextFormField(
+                          controller: fieldTextEditingController,
+                          textCapitalization: TextCapitalization.characters,
+                          focusNode: fieldFocusNode,
+                          onFieldSubmitted: (String value) {
+                            onFieldSubmitted();
+                          },
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Patente',
+                          ),
+                          onChanged: (text) {
+                            setState(() {
+                              _patente = text.toUpperCase();
+                              fieldTextEditingController.value =
+                                  fieldTextEditingController.value
+                                      .copyWith(text: _patente.toUpperCase());
+                            });
+                          },
+                          validator: (value) {
+                            if ((value == null || value.length <= 4) &&
+                                value != '') {
+                              return 'Por favor ingrese una patente valida';
+                            }
+                            RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
+                            if (!r.hasMatch(value!)) {
+                              return 'La patente no puede contener caracteres especiales';
+                            }
+                            return null;
+                          },
+                        );
+                      },
+                      onSelected: (String selection) {
                         setState(() {
-                          _patente = text.toUpperCase();
+                          _patente = selection.toUpperCase();
                           myController.value = myController.value
                               .copyWith(text: _patente.toUpperCase());
                         });
                       },
-                      validator: (value) {
-                        if (value == null || value.length <= 4) {
-                          return 'Por favor ingrese una patente';
-                        }
-                        RegExp r = RegExp(r"^[a-zA-Z0-9]*$");
-                        if (!r.hasMatch(value)) {
-                          return 'La patente no puede contener caracteres especiales';
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Patente',
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    DropdownButton<String>(
-                      value: tipoPago.name,
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          tipoPago = TipoPago.values.firstWhere(
-                              (element) => element.name == newValue);
-                        });
-                      },
-                      items: <String>['efectivo', 'credito', 'debito']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: buildText(value),
-                        );
-                      }).toList(),
                     ),
                   ],
                 )),
             _data != null
-                ? Text(
-                    _data!,
-                    style: Theme.of(context).textTheme.headline4,
+                ? Column(
+                    children: [
+                      Text(
+                        _data!,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ],
                   )
                 : valorTotal != null
-                    ? Text('\$ ' +
-                        valorTotal!.toString().replaceAllMapped(
-                            RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                            (Match m) => '${m[1]},'))
+                    ? Column(
+                        children: [
+                          Text('\$ ' +
+                              valorTotal!.toString().replaceAllMapped(
+                                  RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                  (Match m) => '${m[1]},')),
+                          Card(
+                            child: ListTile(
+                              title: Text(
+                                  '${parked.minutosEstacionado} minutos',
+                                  style: const TextStyle(fontSize: 20)),
+                              subtitle: Text(
+                                  'Ingreso: ${parked.fechaIngresoFormatted()}'),
+                              trailing: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  parked.buildEstado(),
+                                ],
+                              ),
+                              visualDensity: VisualDensity.comfortable,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          SegmentedButton<TipoPago>(
+                            segments: const <ButtonSegment<TipoPago>>[
+                              ButtonSegment<TipoPago>(
+                                  value: TipoPago.efectivo,
+                                  label: Text('Efectivo'),
+                                  icon: Icon(Icons.calendar_view_day)),
+                              ButtonSegment<TipoPago>(
+                                  value: TipoPago.debito,
+                                  label: Text('Debito'),
+                                  icon: Icon(Icons.calendar_view_week)),
+                              ButtonSegment<TipoPago>(
+                                  value: TipoPago.credito,
+                                  label: Text('Crédito'),
+                                  icon: Icon(Icons.calendar_view_month)),
+                            ],
+                            selected: <TipoPago>{tipoPago},
+                            onSelectionChanged: (Set<TipoPago> newSelection) {
+                              setState(() {
+                                tipoPago = newSelection.first;
+                                parked.tipoPago = tipoPago;
+                                print(parked.toJson());
+
+                                api.updateVehicle(parked).then((value) {
+                                  print('updateVehicle: ' + value.toString());
+                                });
+                              });
+                            },
+                          ),
+                        ],
+                      )
                     : const Text('Busca una patente para ver el monto'),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -129,27 +303,23 @@ class Salir extends State<SalirPage> {
               ),
               onPressed: _patente.length >= 5
                   ? () async {
-                      print('patente: ' + _patente);
-                      print('tipoPago: ' + tipoPago.index.toString());
-                      print('tipoPago: ' + tipoPago.name);
-                      var response = await api.toPayVehicle(_patente, tipoPago);
-
-                      print('responseeeeee: ' + response);
-
-                      // intentar parsear response a numero, si no se puede que siga la ejecucion
-                      try {
-                        valorTotal = int.parse(response);
+                      await api
+                          .toPayVehicle(_patente, tipoPago)
+                          .then((parkedResponse) {
+                        print('reeesponse: ' + parkedResponse.toString());
                         setState(() {
                           _data = null;
-                          valorTotal = int.parse(response);
+                          valorTotal = parkedResponse.valorTotal;
+                          parked = parkedResponse;
                         });
-                      } catch (e) {
+                      }).onError((error, stackTrace) {
+                        print('error desde el catch: ' + error.toString());
                         setState(() {
                           valorTotal = null;
 
-                          _data = response;
+                          _data = error.toString();
                         });
-                      }
+                      });
 
                       await api.userHasConfig();
                     }

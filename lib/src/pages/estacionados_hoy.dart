@@ -23,7 +23,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
 
     if (_data.isEmpty) _data = [];
     setState(() {
-      print('dataaaaaa $_data');
+      print('dataaaaaa ${_data.map((e) => e.toJson())}');
       _data = _data;
       loading = false;
     });
@@ -274,6 +274,13 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                     ? Text(_data[index].fechaSalidaFormatted())
                                     : Container(),
                                 _data[index].estado == Estado.pagado
+                                    ? const Text('Tiempo: ')
+                                    : Container(),
+                                _data[index].estado == Estado.pagado
+                                    ? Text(
+                                        '${_data[index].minutosEstacionado.toString()} mínutos')
+                                    : Container(),
+                                _data[index].estado == Estado.pagado
                                     ? Text(
                                         'Valor total: \$ ${_data[index].valorTotal}')
                                     : Container(),
@@ -363,13 +370,23 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                             getData(),
                           })
                       : null,
-                  title: Text(_data[index].patente),
-                  subtitle: _data[index].estado == Estado.pagado
-                      ? Text(
-                          '\$ ${_data[index].valorTotal} con ${_data[index].getTipoPago().toLowerCase()}')
-                      : const Text('...'),
-                  trailing: _data[index].buildEstado(),
-                  leading: Text(_data[index].fechaIngresoFormatted()),
+                  title: Text(_data[index].patente,
+                      style: const TextStyle(fontSize: 20)),
+                  subtitle:
+                      Text('Ingreso: ${_data[index].fechaIngresoFormatted()}'),
+                  trailing: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _data[index].buildEstado(),
+                      _data[index].estado == Estado.pagado
+                          ? Text(
+                              '\$${_data[index].valorTotal}\n${_data[index].getTipoPago().toLowerCase()}')
+                          : const Text(''),
+                    ],
+                  ),
+
+                  visualDensity: VisualDensity.comfortable,
                 ),
               );
             },
