@@ -1,5 +1,6 @@
 import 'package:estacionamiento/src/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'routes/routes.dart' as route;
 
@@ -8,34 +9,6 @@ class MyApp extends StatefulWidget {
 
   @override
   _AppState createState() => _AppState();
-}
-
-Widget somethingWentWrong(context) {
-  final GlobalKey<_AppState> somethingWentWrongKey = GlobalKey<_AppState>();
-
-  return MaterialApp(
-    key: somethingWentWrongKey,
-    debugShowCheckedModeBanner: false,
-    builder: (context, child) => const Center(child: Text('Algo salió mal')),
-    theme: ThemeData(primaryColor: Colors.red),
-  );
-}
-
-Widget loading(context) {
-  final GlobalKey<_AppState> loadingKey = GlobalKey<_AppState>();
-
-  return MaterialApp(
-    key: loadingKey,
-    debugShowCheckedModeBanner: false,
-    builder: (context, child) => Container(
-        color: Colors.blue,
-        child: const Scaffold(
-          body: Center(
-              child: Text(
-            'Cargando',
-          )),
-        )),
-  );
 }
 
 class _AppState extends State<MyApp> {
@@ -88,6 +61,16 @@ class _AppState extends State<MyApp> {
       return MaterialApp(
         key: homeAux,
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('es'),
+        ],
+
         onGenerateRoute: route.controller,
         // initialRoute: route.authPage,
         // routes: getApplicationRoutes(),
@@ -110,4 +93,32 @@ class _AppState extends State<MyApp> {
     }
     return somethingWentWrong(context);
   }
+}
+
+Widget somethingWentWrong(context) {
+  final GlobalKey<_AppState> somethingWentWrongKey = GlobalKey<_AppState>();
+
+  return MaterialApp(
+    key: somethingWentWrongKey,
+    debugShowCheckedModeBanner: false,
+    builder: (context, child) => const Center(child: Text('Algo salió mal')),
+    theme: ThemeData(primaryColor: Colors.red),
+  );
+}
+
+Widget loading(context) {
+  final GlobalKey<_AppState> loadingKey = GlobalKey<_AppState>();
+
+  return MaterialApp(
+    key: loadingKey,
+    debugShowCheckedModeBanner: false,
+    builder: (context, child) => Container(
+        color: Colors.blue,
+        child: const Scaffold(
+          body: Center(
+              child: Text(
+            'Cargando',
+          )),
+        )),
+  );
 }

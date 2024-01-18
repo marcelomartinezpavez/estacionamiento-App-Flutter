@@ -159,6 +159,35 @@ class Api_Service {
     }
   }
 
+  Future<List<Parked>> getEstacionadoPorFechas(
+      DateTime fechaInicio, DateTime fechaFin) async {
+    await userHasConfig();
+    print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);
+    // parsear fechas a yyyy-MM-dd
+    String fechaInicioString = fechaInicio.toString().split(' ')[0];
+    String fechaFinString = fechaFin.toString().split(' ')[0];
+
+    fechaFin = fechaFin.add(const Duration(days: 1));
+
+    print('fechaInicioString: ' + fechaInicio.toString());
+    print('fechaFinString: ' + fechaFin.toString());
+
+    final response = await http.get(
+      Uri.parse('${_url}estacionado/idEstacionamiento/' +
+          _estacionamientoId +
+          '/desde/$fechaInicio/hasta/$fechaFin'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return Parked.fromJsonList(jsonDecode(response.body));
+    } else {
+      return (jsonDecode(response.body));
+    }
+  }
+
   Future deleteEstacionado(String patente) async {
     await userHasConfig();
     print('ESTACIONADO _estacionamientoId ==>: ' + _estacionamientoId);

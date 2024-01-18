@@ -104,8 +104,8 @@ file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/idb_shim-2.0.1/
 file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/idb_shim-2.0.1/lib/
 intl
 2.12
-file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/intl-0.17.0/
-file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/intl-0.17.0/lib/
+file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/intl-0.18.1/
+file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/intl-0.18.1/lib/
 js
 2.16
 file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/js-0.6.4/
@@ -334,6 +334,10 @@ flutter
 3.0
 file:///Users/diegomartinez/Development/flutter/packages/flutter/
 file:///Users/diegomartinez/Development/flutter/packages/flutter/lib/
+flutter_localizations
+3.0
+file:///Users/diegomartinez/Development/flutter/packages/flutter_localizations/
+file:///Users/diegomartinez/Development/flutter/packages/flutter_localizations/lib/
 flutter_test
 3.0
 file:///Users/diegomartinez/Development/flutter/packages/flutter_test/

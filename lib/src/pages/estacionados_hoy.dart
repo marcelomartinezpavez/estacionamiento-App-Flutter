@@ -64,7 +64,6 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                   children: [
                                     Card(
                                       color: Colors.green.shade50,
-                                      // Usar el color pastel que prefieras.
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
@@ -94,7 +93,12 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                                     fontSize: 15)),
                                             Text(
                                                 'Conteo: ' +
-                                                    _data.length.toString(),
+                                                    _data
+                                                        .where((e) =>
+                                                            e.estado !=
+                                                            Estado.cancelado)
+                                                        .length
+                                                        .toString(),
                                                 style: const TextStyle(
                                                     fontSize: 10)),
                                           ],
@@ -132,10 +136,12 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                                     Text(
                                                         'Suma total: \$' +
                                                             _data
-                                                                .map((e) => e
-                                                                            .tipoPago !=
-                                                                        TipoPago
-                                                                            .efectivo
+                                                                .map((e) => ((e.tipoPago !=
+                                                                            TipoPago
+                                                                                .efectivo) &&
+                                                                        (e.estado !=
+                                                                            Estado
+                                                                                .cancelado))
                                                                     ? e
                                                                         .valorTotal
                                                                     : 0)
@@ -150,10 +156,12 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                                         'Conteo: ' +
                                                             _data
                                                                 .where((element) =>
-                                                                    element
-                                                                        .tipoPago !=
-                                                                    TipoPago
-                                                                        .efectivo)
+                                                                    (element.tipoPago !=
+                                                                        TipoPago
+                                                                            .efectivo) &&
+                                                                    (element.estado !=
+                                                                        Estado
+                                                                            .cancelado))
                                                                 .length
                                                                 .toString(),
                                                         style: const TextStyle(
@@ -187,10 +195,12 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                                   Text(
                                                       'Suma total: \$' +
                                                           _data
-                                                              .map((e) => e
-                                                                          .tipoPago ==
-                                                                      TipoPago
-                                                                          .efectivo
+                                                              .map((e) => e.tipoPago ==
+                                                                          TipoPago
+                                                                              .efectivo &&
+                                                                      (e.estado !=
+                                                                          Estado
+                                                                              .cancelado)
                                                                   ? e.valorTotal
                                                                   : 0)
                                                               .reduce((value,
@@ -204,10 +214,12 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
                                                       'Conteo: ' +
                                                           _data
                                                               .where((element) =>
-                                                                  element
-                                                                      .tipoPago ==
-                                                                  TipoPago
-                                                                      .efectivo)
+                                                                  element.tipoPago ==
+                                                                      TipoPago
+                                                                          .efectivo &&
+                                                                  (element.estado !=
+                                                                      Estado
+                                                                          .cancelado))
                                                               .length
                                                               .toString(),
                                                       style: const TextStyle(

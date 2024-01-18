@@ -146,6 +146,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_localizations",
+      "rootUri": "file:///Users/diegomartinez/Development/flutter/packages/flutter_localizations",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/diegomartinez/Development/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -177,7 +183,7 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/intl-0.17.0",
+      "rootUri": "file:///Users/diegomartinez/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -518,7 +524,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2023-11-13T01:13:53.898395Z",
+  "generated": "2024-01-17T02:09:44.800092Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

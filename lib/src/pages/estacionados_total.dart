@@ -1,6 +1,7 @@
 import 'package:estacionamiento/src/model/parked.dart';
 import 'package:estacionamiento/src/pages/salir.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../services/api_service.dart';
 
@@ -16,11 +17,31 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
   List<Parked> _data = [];
   bool loading = true;
   bool showReport = false;
+  DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
+  DateTime endDate = DateTime.now();
 
-  void getData() async {
-    _data = await api.getEstacionadoTotal();
+  // void getData() async {
+  //   _data = await api.getEstacionadoTotal();
+  //   if (_data.isNotEmpty) _data = _data.toList();
+  //
+  //   if (_data.isEmpty) _data = [];
+  //   setState(() {
+  //     print('dataaaaaa $_data');
+  //     _data = _data;
+  //     loading = false;
+  //   });
+  // }
+
+  void getRangeData(DateTime start, DateTime end) async {
+    setState(() {
+      loading = true;
+      startDate = start;
+      endDate = end;
+    });
+    print('start $startDate');
+    print('end $endDate');
+    _data = await api.getEstacionadoPorFechas(startDate, endDate);
     if (_data.isNotEmpty) _data = _data.toList();
-
     if (_data.isEmpty) _data = [];
     setState(() {
       print('dataaaaaa $_data');
@@ -31,7 +52,7 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
 
   @override
   void initState() {
-    getData();
+    getRangeData(startDate, endDate);
     super.initState();
   }
 
@@ -41,6 +62,74 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.blue,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () async {
+                    final dynamic picked = await showDateRangePicker(
+                        context: context,
+                        cancelText: 'Cancelar',
+                        locale: const Locale('es', 'CL'),
+                        confirmText: 'Confirmar',
+                        fieldStartLabelText: 'Fecha de inicio',
+                        fieldEndLabelText: 'Fecha de fin',
+                        errorInvalidRangeText: 'Rango de fechas inválido',
+                        errorFormatText: 'Formato de fecha inválido',
+                        errorInvalidText: 'Fecha inválida',
+                        fieldEndHintText: 'Fecha de fin',
+                        fieldStartHintText: 'Fecha de inicio',
+                        helpText: 'Seleccionar rango de fechas',
+                        initialDateRange: DateTimeRange(
+                          start: startDate,
+                          end: endDate,
+                        ),
+                        firstDate: DateTime(2015),
+                        lastDate: DateTime(2025));
+                    if (picked != null) {
+                      print('picked $picked');
+                      getRangeData(picked.start, picked.end);
+                    }
+                  },
+                  child: const Text('Seleccionar rango de fechas'),
+                )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //   Mostrar dos cards indicando la fecha de inicio y fin del rango de fechas
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          const Text('Fecha de inicio'),
+                          // formatear la fecha a dd-MM-yyyy
+                          Text(DateFormat('dd-MM-yyyy').format(startDate)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          const Text('Fecha de fin'),
+                          Text(DateFormat('dd-MM-yyyy').format(endDate)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             _data.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -64,7 +153,6 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                   children: [
                                     Card(
                                       color: Colors.green.shade50,
-                                      // Usar el color pastel que prefieras.
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
@@ -94,7 +182,12 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                     fontSize: 15)),
                                             Text(
                                                 'Conteo: ' +
-                                                    _data.length.toString(),
+                                                    _data
+                                                        .where((e) =>
+                                                            e.estado !=
+                                                            Estado.cancelado)
+                                                        .length
+                                                        .toString(),
                                                 style: const TextStyle(
                                                     fontSize: 10)),
                                           ],
@@ -132,10 +225,12 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                     Text(
                                                         'Suma total: \$' +
                                                             _data
-                                                                .map((e) => e
-                                                                            .tipoPago !=
-                                                                        TipoPago
-                                                                            .efectivo
+                                                                .map((e) => ((e.tipoPago !=
+                                                                            TipoPago
+                                                                                .efectivo) &&
+                                                                        (e.estado !=
+                                                                            Estado
+                                                                                .cancelado))
                                                                     ? e
                                                                         .valorTotal
                                                                     : 0)
@@ -150,10 +245,12 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                         'Conteo: ' +
                                                             _data
                                                                 .where((element) =>
-                                                                    element
-                                                                        .tipoPago !=
-                                                                    TipoPago
-                                                                        .efectivo)
+                                                                    (element.tipoPago !=
+                                                                        TipoPago
+                                                                            .efectivo) &&
+                                                                    (element.estado !=
+                                                                        Estado
+                                                                            .cancelado))
                                                                 .length
                                                                 .toString(),
                                                         style: const TextStyle(
@@ -187,10 +284,12 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                   Text(
                                                       'Suma total: \$' +
                                                           _data
-                                                              .map((e) => e
-                                                                          .tipoPago ==
-                                                                      TipoPago
-                                                                          .efectivo
+                                                              .map((e) => e.tipoPago ==
+                                                                          TipoPago
+                                                                              .efectivo &&
+                                                                      (e.estado !=
+                                                                          Estado
+                                                                              .cancelado)
                                                                   ? e.valorTotal
                                                                   : 0)
                                                               .reduce((value,
@@ -204,10 +303,12 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                       'Conteo: ' +
                                                           _data
                                                               .where((element) =>
-                                                                  element
-                                                                      .tipoPago ==
-                                                                  TipoPago
-                                                                      .efectivo)
+                                                                  element.tipoPago ==
+                                                                      TipoPago
+                                                                          .efectivo &&
+                                                                  (element.estado !=
+                                                                      Estado
+                                                                          .cancelado))
                                                               .length
                                                               .toString(),
                                                       style: const TextStyle(
@@ -322,7 +423,9 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                                 Navigator.of(
                                                                         context)
                                                                     .pop(true),
-                                                                getData(),
+                                                                getRangeData(
+                                                                    startDate,
+                                                                    startDate),
                                                               }),
                                                     },
                                                     child:
@@ -348,7 +451,8 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                                           _data[index].patente),
                                               fullscreenDialog: true,
                                             )).then((value) => {
-                                              getData(),
+                                              getRangeData(
+                                                  startDate, startDate),
                                             })
                                       },
                                       child: const Text('Ir a pagar'),
@@ -367,7 +471,7 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
                                 SalirPage(patente: _data[index].patente),
                             fullscreenDialog: true,
                           )).then((value) => {
-                            getData(),
+                            getRangeData(startDate, startDate),
                           })
                       : null,
                   title: Text(_data[index].patente,

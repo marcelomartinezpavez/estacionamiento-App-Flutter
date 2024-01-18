@@ -18,7 +18,7 @@ class estacionados extends State<EstacionadosPage>
     ),
     Tab(
       icon: Icon(Icons.calendar_month_rounded),
-      text: 'Total',
+      text: 'Por fechas',
     ),
   ];
   static const String routeName = '/estacionados';

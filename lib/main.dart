@@ -2,7 +2,7 @@ import 'package:estacionamiento/src/app.dart';
 import 'package:flutter/material.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
+void main() {
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
