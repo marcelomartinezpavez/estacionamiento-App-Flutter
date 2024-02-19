@@ -13,11 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8283755-294c-4195-93eb-9ca84bad752e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/a46f85df11ed3d278105635939097b84.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/a46f85df11ed3d278105635939097b84.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/pages/estacionados_hoy.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/pages/estacionados_hoy.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/pages/estacionados_total.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/pages/estacionados_total.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/firebase_app_id_file.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/firebase_app_id_file.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/firebase_options.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase_options.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/pages/salir.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/pages/salir.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +165,7 @@
       <workItem from="1704763440603" duration="698000" />
       <workItem from="1705453144623" duration="4766000" />
       <workItem from="1705540293024" duration="4143000" />
-      <workItem from="1708312037185" duration="1756000" />
+      <workItem from="1708312037185" duration="3416000" />
     </task>
     <task id="LOCAL-00001" summary="se modifica valores para datos de estacionamiento">
       <created>1653542168859</created>

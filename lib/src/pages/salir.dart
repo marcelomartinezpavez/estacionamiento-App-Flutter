@@ -22,7 +22,7 @@ class Salir extends State<SalirPage> {
   int? valorTotal;
   late Parked parked;
   late List<String> actuallyParked;
-
+  bool loading = false;
   Api_Service api = Api_Service();
 
   @override
@@ -301,14 +301,21 @@ class Salir extends State<SalirPage> {
                 minimumSize: const Size.fromHeight(
                     40), // fromHeight use double.infinity as width and 40 is the height
               ),
-              onPressed: _patente.length >= 5
+              onPressed: (_patente.length >= 5 && !loading)
                   ? () async {
+                      setState(() {
+                        _data = null;
+                        valorTotal = null;
+                        loading = true;
+                      });
+
                       await api
                           .toPayVehicle(_patente, tipoPago)
                           .then((parkedResponse) {
                         print('reeesponse: ' + parkedResponse.toString());
                         setState(() {
                           _data = null;
+                          loading = false;
                           valorTotal = parkedResponse.valorTotal;
                           parked = parkedResponse;
                         });
@@ -316,7 +323,7 @@ class Salir extends State<SalirPage> {
                         print('error desde el catch: ' + error.toString());
                         setState(() {
                           valorTotal = null;
-
+                          loading = false;
                           _data = error.toString();
                         });
                       });
@@ -324,7 +331,13 @@ class Salir extends State<SalirPage> {
                       await api.userHasConfig();
                     }
                   : null,
-              child: const Text('Sacar vehículo'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Sacar vehículo'),
+                  if (loading) const CircularProgressIndicator.adaptive(),
+                ],
+              ),
             ),
           ],
         ),

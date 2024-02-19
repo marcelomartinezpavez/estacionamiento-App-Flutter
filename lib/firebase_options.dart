@@ -21,11 +21,20 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for android - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -44,38 +53,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA38rZeMeWkAfbBlohKkAQcA175yJH_wHo',
-    appId: '1:650488213329:web:807c412a79d6e4bc92ed70',
-    messagingSenderId: '650488213329',
-    projectId: 'estacionamiento-f',
-    authDomain: 'estacionamiento-f.firebaseapp.com',
-    storageBucket: 'estacionamiento-f.appspot.com',
-    measurementId: 'G-SCBHB1GHQ3',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDfkioKl5yWwdji-ZgHJNPZdxJtgwT3kjY',
-    appId: '1:650488213329:android:095602d420c625ce92ed70',
-    messagingSenderId: '650488213329',
-    projectId: 'estacionamiento-f',
-    storageBucket: 'estacionamiento-f.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBfxySRxZ-TMWd95tR7IzGK-ZQjUO1l5a4',
-    appId: '1:650488213329:ios:5540b42419bb88b692ed70',
-    messagingSenderId: '650488213329',
-    projectId: 'estacionamiento-f',
-    storageBucket: 'estacionamiento-f.appspot.com',
-    iosBundleId: 'com.estacionamiento.estacionamiento',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBfxySRxZ-TMWd95tR7IzGK-ZQjUO1l5a4',
-    appId: '1:650488213329:ios:1abe55c10b42bfcc92ed70',
-    messagingSenderId: '650488213329',
-    projectId: 'estacionamiento-f',
-    storageBucket: 'estacionamiento-f.appspot.com',
-    iosBundleId: 'com.hm.estacionamiento',
+    apiKey: 'AIzaSyDLt23sUXnqOgEpDORXXc7L4xTTlou0SL4',
+    appId: '1:446308895322:web:9cff40eeb86d6bb0bae663',
+    messagingSenderId: '446308895322',
+    projectId: 'estacionamiento-f-eca54',
+    authDomain: 'estacionamiento-f-eca54.firebaseapp.com',
+    storageBucket: 'estacionamiento-f-eca54.appspot.com',
+    measurementId: 'G-C4K5XXVKSB',
   );
 }
