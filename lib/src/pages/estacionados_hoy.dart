@@ -1,6 +1,7 @@
 import 'package:estacionamiento/src/model/parked.dart';
 import 'package:estacionamiento/src/pages/salir.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../services/api_service.dart';
 
@@ -16,6 +17,7 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
   List<Parked> _data = [];
   bool loading = true;
   bool showReport = false;
+  final myController = TextEditingController();
 
   void getData() async {
     _data = await api.getEstacionadoHoy();
@@ -41,6 +43,34 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            //Un TextField para filtrar por patente en la lista
+            Focus(
+                onKey: (node, event) {
+                  if (event.logicalKey == LogicalKeyboardKey.backspace) {
+                    print('backspace');
+                    getData();
+                    myController.clear();
+
+                    return KeyEventResult.handled;
+                  }
+                  return KeyEventResult.ignored;
+                },
+                child: TextFormField(
+                  controller: myController,
+                  onChanged: (text) {
+                    setState(() {
+                      _data = _data
+                          .where((element) => element.patente
+                              .toLowerCase()
+                              .contains(text.toLowerCase()))
+                          .toList();
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Filtrar por patente',
+                  ),
+                )),
             _data.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),

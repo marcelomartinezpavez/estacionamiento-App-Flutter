@@ -1,6 +1,7 @@
 import 'package:estacionamiento/src/model/parked.dart';
 import 'package:estacionamiento/src/pages/salir.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../services/api_service.dart';
@@ -19,6 +20,7 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
   bool showReport = false;
   DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
   DateTime endDate = DateTime.now();
+  final myController = TextEditingController();
 
   // void getData() async {
   //   _data = await api.getEstacionadoTotal();
@@ -62,6 +64,34 @@ class _EstacionadosTotalState extends State<EstacionadosTotal> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            //Un TextField para filtrar por patente en la lista
+            Focus(
+                onKey: (node, event) {
+                  if (event.logicalKey == LogicalKeyboardKey.backspace) {
+                    print('backspace');
+                    getRangeData(startDate, endDate);
+                    myController.clear();
+
+                    return KeyEventResult.handled;
+                  }
+                  return KeyEventResult.ignored;
+                },
+                child: TextFormField(
+                  controller: myController,
+                  onChanged: (text) {
+                    setState(() {
+                      _data = _data
+                          .where((element) => element.patente
+                              .toLowerCase()
+                              .contains(text.toLowerCase()))
+                          .toList();
+                    });
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Filtrar por patente',
+                  ),
+                )),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
