@@ -65,12 +65,12 @@ class Parked {
 
   fechaIngresoFormatted() {
     return DateFormat('dd/MM/yyyy HH:mm')
-        .format(fechaIngreso.subtract(const Duration(hours: 3)));
+        .format(fechaIngreso.subtract(const Duration(hours: 4)));
   }
 
   fechaSalidaFormatted() {
     return DateFormat('dd/MM/yyyy HH:mm')
-        .format(fechaSalida!.subtract(const Duration(hours: 3)));
+        .format(fechaSalida!.subtract(const Duration(hours: 4)));
   }
 
   String getTipoPago() {

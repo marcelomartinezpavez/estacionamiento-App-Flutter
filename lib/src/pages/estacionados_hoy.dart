@@ -20,6 +20,9 @@ class _EstacionadosHoyState extends State<EstacionadosHoy> {
   final myController = TextEditingController();
 
   void getData() async {
+    setState(() {
+      loading = true;
+    });
     _data = await api.getEstacionadoHoy();
     if (_data.isNotEmpty) _data = _data.toList();
 
